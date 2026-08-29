@@ -43,3 +43,6 @@ dist/
 # Optional large intermediate data
 data/processed/*
 !data/processed/.gitkeep
+
+# Raw competition data
+data/raw/*
