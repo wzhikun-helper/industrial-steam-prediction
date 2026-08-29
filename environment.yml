@@ -1,11 +1,20 @@
 name: steam-prediction
+
 channels:
   - defaults
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/
+
 dependencies:
   - python=3.11
+  - pip
+  - pip:
+      - numpy==2.4.6
+      - pandas==3.0.5
+      - matplotlib==3.11.1
+      - seaborn==0.13.2
+      - scikit-learn==1.9.0
+      - xgboost==3.2.0
+      - lightgbm==4.7.0
+      - shap==0.51.0
+      - joblib==1.5.3
+      - jupyter==1.1.1
 
