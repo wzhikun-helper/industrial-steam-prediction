@@ -1,4 +1,4 @@
-name: base
+name: steam-prediction
 channels:
   - defaults
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
@@ -7,18 +7,5 @@ channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/
 dependencies:
-  - python=3.13
-  - conda=26.3.2
-  - setuptools
-  - pip
-  - wheel
-  - conda-anaconda-telemetry[version='>=0.3.0']
-  - conda-anaconda-tos[version='>=0.2.2']
-  - conda-content-trust
-  - conda-libmamba-solver
-  - menuinst
-  - anaconda_prompt
-  - anaconda_powershell_prompt
-  - anaconda-anon-usage
-  - anaconda-auth
-prefix: D:\miniconda
+  - python=3.11
+
