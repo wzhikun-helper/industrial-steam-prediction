@@ -1,224 +1,71 @@
 # Industrial Steam Prediction
 
-工业蒸汽量预测机器学习项目。
+## Overview
 
-本项目基于天池工业蒸汽量预测数据集，完成了从数据探索、特征分析、模型训练、参数优化、模型融合、SHAP 可解释性分析，到最终测试集预测的完整机器学习流程。
+本项目围绕工业蒸汽量回归预测，比较正则化线性模型、树模型、特征处理、超参数优化、模型融合与 SHAP 解释。项目用于实验研究和论文整理，不宣称 SOTA，也不夸大边际性能差异。
 
-## 项目目标
+## Dataset
 
-根据 38 个匿名工业特征 `V0`～`V37` 预测目标变量 `target`，并建立一套：
+- 训练集：2,888 个样本、38 个匿名特征（`V0`–`V37`）和目标变量 `target`。
+- 测试集：1,925 个样本、38 个匿名特征，无公开真实标签。
 
-- 可复现；
-- 可比较；
-- 可解释；
-- 可用于论文整理。
+## Methods
 
-的机器学习实验流程。
+Ridge、XGBoost、GBDT、LightGBM、Random Forest、KBest、PCA、Weighted Blend、Stacking 和 SHAP。
 
-## 项目结构
+## Validation
 
-```text
-industrial-steam-prediction/
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── README.md
-│
-├── notebooks/
-│   ├── 01_experiment.ipynb
-│   └── README.md
-│
-├── src/
-│   └── README.md
-│
-├── figures/
-│   └── README.md
-│
-├── results/
-│   └── README.md
-│
-├── models/
-│   └── README.md
-│
-├── paper/
-│   └── README.md
-│
-├── skill/
-│   └── README.md
-│
-└── README.md
-```
+主评估使用 5 折 `TimeSeriesSplit`；`KFold` 仅用于验证策略敏感性分析。数据的严格时间语义尚未完全确认，因此不能据此证明某一种划分必然更合理。
 
-## 数据集
+## Key Results
 
-训练集包含：
+Best Ridge（`alpha = 5`）：MSE = 0.1304，RMSE = 0.3593，MAE = 0.2639，R² = 0.8525。
 
-- 2888 个样本；
-- 38 个匿名特征 `V0`～`V37`；
-- 1 个目标变量 `target`。
+独立融合验证集 N = 481。Weighted Blend（0.7 Ridge + 0.3 XGBoost）：MSE = 0.1766，RMSE = 0.420，MAE = 0.287，R² = 0.819。其 MSE 相对 Best Ridge 仅降低约 0.19%，属于边际数值改善。
 
-测试集包含：
+## Interpretability
 
-- 1925 个样本；
-- 38 个输入特征；
-- 不包含目标变量。
+SHAP 仅解释 Best XGBoost 分支，不解释 Weighted Blend 或完整融合模型。全局平均绝对 SHAP 值中，`V0 = 0.329`、`V1 = 0.179`；匿名特征不支持物理或因果含义推断。
 
-原始数据保存在：
+## Project Structure
 
-```text
-data/raw/
-```
+- `data/`：原始数据与预处理数据位置。
+- `figures/`：Notebook 草稿图及 `figures/paper/` 冻结论文图。
+- `models/`：冻结模型与融合配置。
+- `notebooks/`：主实验 Notebook。
+- `paper/`：中英文论文及共享图注、表注和文献池。
+- `results/`：实验输出与论文专用冻结 CSV。
+- `scripts/`：论文图生成和辅助检查脚本。
+- `skill/`：项目工作流 Skill 及历史版本。
+- `src/`：可复用 Python 模块。
 
-## 实验流程
+## Reproducibility
 
-主要实验流程包括：
+环境定义见 `environment.yml`，主要实验见 `notebooks/01_experiment.ipynb`。当前实验结果已经冻结；论文写作和绘图应直接引用 `results/` 下的正式 CSV，不应重新训练模型或重算指标。
 
-1. 数据读取与质量检查；
-2. 描述性统计与目标变量分布分析；
-3. IQR 异常值分析；
-4. Pearson 相关性分析；
-5. KBest 特征筛选；
-6. PCA 降维；
-7. Ridge、Random Forest、GBDT、XGBoost、LightGBM 模型比较；
-8. Ridge 与 XGBoost 参数优化；
-9. Ridge + XGBoost 加权融合；
-10. Stacking 融合；
-11. SHAP 特征重要性和贡献方向分析；
-12. 真实值与预测值分析；
-13. 残差与大误差样本分析；
-14. 最终模型训练；
-15. 官方测试集预测与模型保存。
+## Papers
 
-## 主要实验结果
+- 中文稿：`paper/zju_zh/main.pdf`，目标版式为《浙江大学学报（工学版）》。
+- 英文稿：`paper/acm_mm/main.pdf`，ACM Multimedia / ACM MM working draft。
 
-基础模型中，Ridge 表现最好。
+两篇稿件共享同一套冻结实验结果，但不是逐句翻译关系。
 
-### 优化后的 Ridge
+## Figures
 
-- `alpha = 5`
-- 平均 MSE：`0.130369`
-- 平均 RMSE：`0.359262`
-- 平均 MAE：`0.263933`
-- 平均 R²：`0.852496`
+- 英文正式图：`figures/paper/fig1_*.pdf` 至 `fig6_*.pdf`。
+- 中文正式图：文件名以 `_zh.pdf` 结尾。
+- PDF 为正式矢量输出，SVG 为可编辑矢量版本，PNG 为 300 dpi 预览。
 
-### 优化后的 XGBoost
+## Limitations
 
-- 平均 MSE：`0.149834`
-- 平均 RMSE：`0.385839`
-- 平均 MAE：`0.288822`
-- 平均 R²：`0.826074`
+- 特征语义匿名，无法作可靠物理解释。
+- 数据的严格时间语义未完全确认。
+- 融合收益仅约 0.19%。
+- 未开展重复独立试验或统计显著性分析。
+- SHAP 仅解释 Best XGBoost。
+- 预测残差仍存在尾部和少量较大误差。
+- 无标签测试集无法计算真实泛化指标。
 
-### 最终加权融合方案
+## Repository Status
 
-```text
-0.7 × Ridge + 0.3 × XGBoost
-```
-
-在独立二层测试集上，加权融合略优于 Best Ridge。
-
-## SHAP 可解释性结果
-
-SHAP 分析表明，模型中较重要的特征包括：
-
-- V0
-- V1
-- V2
-- V3
-- V10
-- V27
-- V8
-- V37
-
-其中：
-
-- V0 和 V1 整体表现为明显正向贡献；
-- V37 整体表现为负向贡献；
-- V0 是当前 XGBoost 模型中最重要的特征。
-
-## 运行环境
-
-推荐环境：
-
-```text
-Python 3.11
-Conda environment: steam-prediction
-```
-
-主要依赖：
-
-```text
-numpy
-pandas
-matplotlib
-seaborn
-scikit-learn
-xgboost
-lightgbm
-shap
-joblib
-jupyter
-```
-
-## 启动 Notebook
-
-激活环境：
-
-```powershell
-conda activate steam-prediction
-```
-
-进入项目目录：
-
-```powershell
-cd D:\Projects\industrial-steam-prediction
-```
-
-启动 Jupyter：
-
-```powershell
-jupyter lab
-```
-
-然后打开：
-
-```text
-notebooks/01_experiment.ipynb
-```
-
-## 结果文件
-
-实验指标和预测结果保存在：
-
-```text
-results/
-```
-
-实验图保存在：
-
-```text
-figures/
-```
-
-训练模型保存在：
-
-```text
-models/
-```
-
-## 论文计划
-
-中文论文参考《浙江大学学报（工学版）》近期相关文章的结构、行文方式和版式规范。
-
-英文论文使用 ACM MM 官方模板进行整理。
-
-两篇论文使用同一套真实实验结果，不人为修改实验指标。
-
-## Skill
-
-项目后续将把完整实验流程整理为可复用 Skill，并进行：
-
-```text
-v1 → 实际执行 → 问题记录 → v2 → 版本比较
-```
-
-以验证工作流的完整性和可复现性。
+这是已冻结的实验研究项目，不宣称 SOTA。仓库用于成果归档、复核与投稿材料维护。

@@ -73,4 +73,4 @@ Conda environment: steam-prediction
 - 重要图像保存到 `figures/`；
 - 最终模型保存到 `models/`；
 - 特征处理尽量通过 Pipeline 完成，降低数据泄漏风险；
-- 当前 Notebook 中的图片主要用于实验分析，正式论文图片将在后续科研作图阶段重新整理。
+- Notebook 中的图片用于实验分析；已冻结的正式论文图位于 `figures/paper/`。

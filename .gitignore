@@ -26,11 +26,17 @@ Thumbs.db
 
 # LaTeX temporary files
 *.aux
+*.bbl
+*.blg
 *.out
 *.toc
 *.synctex.gz
 *.fls
 *.fdb_latexmk
+
+# Project-local render and inspection output
+tmp/
+paper/acm_mm/main.txt
 
 # Python cache / build
 build/

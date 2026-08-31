@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="221.102362pt" height="136.062992pt" viewBox="0 0 221.102362 136.062992" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-30T18:37:53.699122</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.7.5, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 136.062992 
+L 221.102362 136.062992 
+L 221.102362 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 81.807874 100.686614 
+L 216.680315 100.686614 
+L 216.680315 9.524409 
+L 81.807874 9.524409 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="LineCollection_1">
+    <path d="M 91.500632 22.991553 
+L 91.500632 97.578812 
+" clip-path="url(#p558c09bc1c)" style="fill: none; stroke-dasharray: 1.32,1.32; stroke-dashoffset: 0; stroke: #b5b5b5; stroke-width: 0.6"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m06a91dc4da" d="M 0 0 
+L 0 -2.5 
+" style="stroke: #333333; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#m06a91dc4da" x="109.677525" y="100.686614" style="fill: #333333; stroke: #333333; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="fill: #333333; font: 10px 'Times New Roman'; text-anchor: middle" x="109.677525" y="111.130364" transform="rotate(-0 109.677525 111.130364)">0.180</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m06a91dc4da" x="139.198441" y="100.686614" style="fill: #333333; stroke: #333333; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="fill: #333333; font: 10px 'Times New Roman'; text-anchor: middle" x="139.198441" y="111.130364" transform="rotate(-0 139.198441 111.130364)">0.185</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m06a91dc4da" x="168.719357" y="100.686614" style="fill: #333333; stroke: #333333; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="fill: #333333; font: 10px 'Times New Roman'; text-anchor: middle" x="168.719357" y="111.130364" transform="rotate(-0 168.719357 111.130364)">0.190</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m06a91dc4da" x="198.240273" y="100.686614" style="fill: #333333; stroke: #333333; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="fill: #333333; font: 10px 'Times New Roman'; text-anchor: middle" x="198.240273" y="111.130364" transform="rotate(-0 198.240273 111.130364)">0.195</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_5"/>
+     <g id="text_5">
+      <text style="fill: #0072b2; font: 10px 'Times New Roman'; text-anchor: end" x="78.307874" y="31.643099" transform="rotate(-0 78.307874 31.643099)">Weighted Blend</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_6"/>
+     <g id="text_6">
+      <text style="fill: #222222; font: 10px 'Times New Roman'; text-anchor: end" x="78.307874" y="52.361782" transform="rotate(-0 78.307874 52.361782)">Best Ridge</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_7"/>
+     <g id="text_7">
+      <text style="fill: #222222; font: 10px 'Times New Roman'; text-anchor: end" x="78.307874" y="73.080465" transform="rotate(-0 78.307874 73.080465)">Stacking</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_8"/>
+     <g id="text_8">
+      <text style="fill: #222222; font: 10px 'Times New Roman'; text-anchor: end" x="78.307874" y="93.799148" transform="rotate(-0 78.307874 93.799148)">Best XGBoost</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 81.807874 100.686614 
+L 81.807874 9.524409 
+" style="fill: none; stroke: #333333; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 81.807874 100.686614 
+L 216.680315 100.686614 
+" style="fill: none; stroke: #333333; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m96ec6157fe" d="M 0 3.605551 
+L 3.605551 0 
+L 0 -3.605551 
+L -3.605551 0 
+z
+" style="stroke: #0072b2; stroke-width: 0.8"/>
+    </defs>
+    <g clip-path="url(#p558c09bc1c)">
+     <use xlink:href="#m96ec6157fe" x="89.566023" y="28.171224" style="fill: #0072b2; stroke: #0072b2; stroke-width: 0.8"/>
+    </g>
+   </g>
+   <g id="text_9">
+    <text style="fill: #404040; font: 6.3px 'Times New Roman'; text-anchor: start" x="95.566023" y="29.684701" transform="rotate(-0 95.566023 29.684701)">0.1766</text>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="m80697f835c" d="M 0 2.397916 
+C 0.635935 2.397916 1.245909 2.145256 1.695582 1.695582 
+C 2.145256 1.245909 2.397916 0.635935 2.397916 0 
+C 2.397916 -0.635935 2.145256 -1.245909 1.695582 -1.695582 
+C 1.245909 -2.145256 0.635935 -2.397916 0 -2.397916 
+C -0.635935 -2.397916 -1.245909 -2.145256 -1.695582 -1.695582 
+C -2.145256 -1.245909 -2.397916 -0.635935 -2.397916 0 
+C -2.397916 0.635935 -2.145256 1.245909 -1.695582 1.695582 
+C -1.245909 2.145256 -0.635935 2.397916 0 2.397916 
+z
+" style="stroke: #585858; stroke-width: 0.7"/>
+    </defs>
+    <g clip-path="url(#p558c09bc1c)">
+     <use xlink:href="#m80697f835c" x="91.500632" y="48.889907" style="fill: #585858; stroke: #585858; stroke-width: 0.7"/>
+    </g>
+   </g>
+   <g id="text_10">
+    <text style="fill: #404040; font: 6.3px 'Times New Roman'; text-anchor: start" x="96.500632" y="50.403384" transform="rotate(-0 96.500632 50.403384)">0.1769</text>
+   </g>
+   <g id="PathCollection_3">
+    <g clip-path="url(#p558c09bc1c)">
+     <use xlink:href="#m80697f835c" x="103.516241" y="69.60859" style="fill: #585858; stroke: #585858; stroke-width: 0.7"/>
+    </g>
+   </g>
+   <g id="text_11">
+    <text style="fill: #404040; font: 6.3px 'Times New Roman'; text-anchor: start" x="108.516241" y="71.122066" transform="rotate(-0 108.516241 71.122066)">0.1790</text>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#p558c09bc1c)">
+     <use xlink:href="#m80697f835c" x="208.922166" y="90.327273" style="fill: #585858; stroke: #585858; stroke-width: 0.7"/>
+    </g>
+   </g>
+   <g id="text_12">
+    <text style="fill: #404040; font: 6.3px 'Times New Roman'; text-anchor: end" x="205.922166" y="91.840749" transform="rotate(-0 205.922166 91.840749)">0.1968</text>
+   </g>
+   <g id="text_13">
+    <text style="fill: #8a8a8a; font: 5.7px 'Times New Roman'; text-anchor: middle" x="89.566023" y="38.129162" transform="rotate(-0 89.566023 38.129162)">-0.19%</text>
+   </g>
+   <g id="AnnotationBbox_1">
+    <g id="text_14">
+     <text style="fill: #8a8a8a; font: 5.7px 'Times New Roman'; text-anchor: start" x="94.500632" y="17.728202" transform="rotate(-0 94.500632 17.728202)">Best Ridge</text>
+    </g>
+    <g id="text_15">
+     <text style="fill: #8a8a8a; font: 5.7px 'SimSun'; text-anchor: start" x="121.675928" y="18.256788" transform="rotate(-0 121.675928 18.256788)">参考线</text>
+    </g>
+   </g>
+   <g id="AnnotationBbox_2">
+    <g id="text_16">
+     <text style="fill: #222222; font: 8px 'SimSun'; text-anchor: start" x="117.019719" y="120.648058" transform="rotate(-0 117.019719 120.648058)">均方误差（</text>
+    </g>
+    <g id="text_17">
+     <text style="fill: #222222; font: 8px 'Times New Roman'; text-anchor: start" x="157.019719" y="119.929308" transform="rotate(-0 157.019719 119.929308)">MSE</text>
+    </g>
+    <g id="text_18">
+     <text style="fill: #222222; font: 8px 'SimSun'; text-anchor: start" x="173.468469" y="120.351183" transform="rotate(-0 173.468469 120.351183)">）</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p558c09bc1c">
+   <rect x="81.807874" y="9.524409" width="134.872441" height="91.162205"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,92 +1,44 @@
-# Results Directory
+# Results
 
-本目录用于保存工业蒸汽量预测项目运行过程中产生的实验结果文件，包括数据统计结果、模型评估指标、参数优化结果、模型融合结果、SHAP 特征重要性以及最终测试集预测结果。
+本目录保存冻结的实验评估、融合、解释、误差分析和测试集预测结果。
 
-## 主要文件说明
-
-### 数据分析结果
-
-- `data_type_counts.csv`
-  - 保存训练数据中不同数据类型的数量。
-
-- `descriptive_statistics.csv`
-  - 保存各特征及目标变量的描述性统计结果。
-
-- `target_descriptive_statistics.csv`
-  - 保存目标变量 `target` 的统计信息。
-
-- `iqr_outlier_statistics.csv`
-  - 保存基于 IQR 方法统计得到的各特征异常值数量和比例。
-
-- `feature_target_correlation.csv`
-  - 保存各输入特征与目标变量之间的 Pearson 相关系数。
-
-- `top_features_correlation_matrix.csv`
-  - 保存高相关特征之间的相关系数矩阵。
-
-## 特征处理实验
-
-- `feature_method_comparison.csv`
-  - 比较全部特征、KBest 特征筛选和 PCA 降维三种方案。
-
-- `kbest20_ridge_cv_metrics.csv`
-  - KBest 选择 20 个特征后 Ridge 模型的交叉验证结果。
-
-- `pca95_ridge_cv_metrics.csv`
-  - PCA 保留 95% 累计解释方差后 Ridge 模型的交叉验证结果。
-
-## 基础模型实验
-
-- `ridge_baseline_cv_metrics.csv`
-- `random_forest_cv_metrics.csv`
-- `gbdt_cv_metrics.csv`
-- `xgboost_cv_metrics.csv`
-- `lightgbm_cv_metrics.csv`
-
-以上文件分别保存各基础模型在交叉验证中的 MSE、RMSE、MAE 和 R²。
-
-- `baseline_model_comparison.csv`
-  - 保存基础模型性能汇总与排名。
-
-## 参数优化
-
-- `ridge_alpha_tuning.csv`
-  - Ridge 正则化参数 `alpha` 的网格搜索结果。
-
-- `tuning_comparison.csv`
-  - Ridge 和 XGBoost 参数优化前后的性能比较。
-
-- `best_xgboost_cv_metrics.csv`
-  - 优化后 XGBoost 的交叉验证结果。
+## A. Main evaluation
 
 - `final_model_comparison.csv`
-  - 保存所有主要模型及优化模型的最终性能排名。
+- `feature_method_comparison.csv`
+- `ridge_alpha_tuning.csv`
+- `tuning_comparison.csv`
+- `validation_strategy_comparison.csv`
 
-## 模型融合
-
-- `weighted_blending_search.csv`
-  - 保存 Ridge 与 XGBoost 不同加权比例下的 MSE。
-
-- `weighted_blending_summary.csv`
-  - 保存最优加权融合方案及其指标。
+## B. Fusion evaluation
 
 - `fusion_model_comparison.csv`
-  - 比较 Best Ridge、Best XGBoost、Weighted Blend 和 Stacking。
+- `paper_fig4_fusion_comparison.csv`
+- `paper_fig6_prediction_diagnostics.csv`
 
-## SHAP 分析
+最终融合性能采用独立融合验证集（N = 481）。`weighted_blending_summary.csv` 仅记录 weight-search process；其中 same-pool OOF MSE 更乐观，不能作为 final fusion performance。
+
+## C. Interpretation
 
 - `shap_feature_importance.csv`
-  - 保存各特征的平均绝对 SHAP 值，用于分析特征整体重要性。
-
-## 误差分析
-
+- `paper_fig5_shap_importance.csv`
 - `weighted_blend_error_analysis.csv`
-  - 保存最终融合模型在独立二层测试集上的真实值、预测值、残差和绝对误差。
 
-## 最终预测
+SHAP 仅解释 Best XGBoost；误差分析对应独立融合验证集上的 Weighted Blend。
 
-- `test_predictions_all_models.csv`
-  - 保存 Ridge、XGBoost 和最终加权融合模型在官方测试集上的全部预测结果。
+## D. Paper-specific frozen CSV
 
-- `final_test_prediction.csv`
-  - 保存最终加权融合模型的官方测试集预测结果。
+- `paper_fig1_target_distribution.csv`
+- `paper_fig2_model_performance.csv`
+- `paper_fig3_feature_method_comparison.csv`
+- `paper_fig3_ridge_alpha_sensitivity.csv`
+- `paper_fig4_fusion_comparison.csv`
+- `paper_fig5_shap_importance.csv`
+- `paper_fig6_prediction_diagnostics.csv`
+
+这些文件是 Fig. 1–Fig. 6 的冻结绘图数据源。论文数字清单见 `paper_result_manifest.md`。
+
+## Other outputs
+
+- `final_test_prediction.csv`：无标签测试集的最终预测。
+- `test_predictions_all_models.csv`：多个模型的测试集预测，不能用于计算真实测试指标。
