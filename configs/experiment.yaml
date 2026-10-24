@@ -1,0 +1,73 @@
+{
+  "data": {
+    "train": "data/raw/zhengqi_train.txt",
+    "test": "data/raw/zhengqi_test.txt",
+    "train_shape": [
+      2888,
+      39
+    ],
+    "test_shape": [
+      1925,
+      38
+    ],
+    "features": [
+      "V0",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6",
+      "V7",
+      "V8",
+      "V9",
+      "V10",
+      "V11",
+      "V12",
+      "V13",
+      "V14",
+      "V15",
+      "V16",
+      "V17",
+      "V18",
+      "V19",
+      "V20",
+      "V21",
+      "V22",
+      "V23",
+      "V24",
+      "V25",
+      "V26",
+      "V27",
+      "V28",
+      "V29",
+      "V30",
+      "V31",
+      "V32",
+      "V33",
+      "V34",
+      "V35",
+      "V36",
+      "V37"
+    ],
+    "target": "target"
+  },
+  "random_state": 42,
+  "validation": {
+    "primary": {
+      "name": "TimeSeriesSplit",
+      "n_splits": 5
+    },
+    "comparison": {
+      "name": "KFold",
+      "n_splits": 5,
+      "shuffle": true,
+      "random_state": 42
+    }
+  },
+  "rmse_aggregation": "mean_of_fold_rmse",
+  "output_roots": [
+    "staging",
+    "reproduction"
+  ]
+}

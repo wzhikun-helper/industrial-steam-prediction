@@ -52,3 +52,21 @@ data/processed/*
 
 # Raw competition data
 data/raw/*
+
+# Local-only migration/release evidence; keep on disk, never publish wholesale.
+staging/
+reproduction/
+docs/step*.py
+paper/*_layout_revision/render*/
+paper/*_layout_revision/step31_before/
+paper/*_layout_revision/step31_render_final/
+paper/*_layout_revision/compare_page_*.png
+paper/*_layout_revision/step31_contact_*.png
+paper/*_layout_revision/build_*.txt
+paper/*_layout_revision/*_text.txt
+paper/*_layout_revision/template_evidence/
+paper/*_layout_revision/protected_before.json
+paper/*_layout_revision/step31_changes.diff
+paper/*_layout_revision/step31_checks.json
+paper/*_layout_revision/local_font_paths.tex
+paper/*_layout_revision/OT.*

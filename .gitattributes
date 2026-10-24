@@ -1,0 +1,91 @@
+# New source files use portable LF. Frozen files retain their recorded checkout bytes.
+* text=auto eol=lf
+figures/paper/fig1_target_distribution.pdf -text
+figures/paper/fig1_target_distribution.png -text
+figures/paper/fig1_target_distribution.svg text eol=crlf
+figures/paper/fig1_target_distribution_zh.pdf -text
+figures/paper/fig1_target_distribution_zh.png -text
+figures/paper/fig1_target_distribution_zh.svg text eol=crlf
+figures/paper/fig2_model_performance.pdf -text
+figures/paper/fig2_model_performance.png -text
+figures/paper/fig2_model_performance.svg text eol=crlf
+figures/paper/fig2_model_performance_zh.pdf -text
+figures/paper/fig2_model_performance_zh.png -text
+figures/paper/fig2_model_performance_zh.svg text eol=crlf
+figures/paper/fig3_feature_ridge_sensitivity.pdf -text
+figures/paper/fig3_feature_ridge_sensitivity.png -text
+figures/paper/fig3_feature_ridge_sensitivity.svg text eol=crlf
+figures/paper/fig3_feature_ridge_sensitivity_zh.pdf -text
+figures/paper/fig3_feature_ridge_sensitivity_zh.png -text
+figures/paper/fig3_feature_ridge_sensitivity_zh.svg text eol=crlf
+figures/paper/fig4_fusion_comparison.pdf -text
+figures/paper/fig4_fusion_comparison.png -text
+figures/paper/fig4_fusion_comparison.svg text eol=crlf
+figures/paper/fig4_fusion_comparison_zh.pdf -text
+figures/paper/fig4_fusion_comparison_zh.png -text
+figures/paper/fig4_fusion_comparison_zh.svg text eol=crlf
+figures/paper/fig5_shap_importance.pdf -text
+figures/paper/fig5_shap_importance.png -text
+figures/paper/fig5_shap_importance.svg text eol=crlf
+figures/paper/fig5_shap_importance_zh.pdf -text
+figures/paper/fig5_shap_importance_zh.png -text
+figures/paper/fig5_shap_importance_zh.svg text eol=crlf
+figures/paper/fig6_prediction_diagnostics.pdf -text
+figures/paper/fig6_prediction_diagnostics.png -text
+figures/paper/fig6_prediction_diagnostics.svg text eol=crlf
+figures/paper/fig6_prediction_diagnostics_zh.pdf -text
+figures/paper/fig6_prediction_diagnostics_zh.png -text
+figures/paper/fig6_prediction_diagnostics_zh.svg text eol=crlf
+models/best_ridge_model.joblib -text
+models/best_xgboost_model.joblib -text
+models/weighted_fusion_config.joblib -text
+paper/acm_mm/main.pdf -text
+paper/acm_mm/main.tex text eol=lf
+paper/acm_mm/references.bib text eol=lf
+paper/zju_zh/main.pdf -text
+paper/zju_zh/main.tex text eol=lf
+paper/zju_zh/references.bib text eol=lf
+results/baseline_model_comparison.csv text eol=crlf
+results/best_ridge_cv_metrics.csv text eol=crlf
+results/best_xgboost_cv_metrics.csv text eol=crlf
+results/best_xgboost_summary.csv text eol=crlf
+results/data_type_counts.csv text eol=crlf
+results/descriptive_statistics.csv text eol=crlf
+results/feature_method_comparison.csv text eol=crlf
+results/feature_target_correlation.csv text eol=crlf
+results/final_model_comparison.csv text eol=crlf
+results/final_test_prediction.csv text eol=crlf
+results/fusion_model_comparison.csv text eol=crlf
+results/gbdt_cv_metrics.csv text eol=crlf
+results/gbdt_summary.csv text eol=crlf
+results/iqr_outlier_statistics.csv text eol=crlf
+results/kbest20_ridge_cv_metrics.csv text eol=crlf
+results/kbest20_ridge_summary.csv text eol=crlf
+results/lightgbm_cv_metrics.csv text eol=crlf
+results/lightgbm_summary.csv text eol=crlf
+results/paper_fig1_target_distribution.csv text eol=crlf
+results/paper_fig2_model_performance.csv text eol=crlf
+results/paper_fig3_feature_method_comparison.csv text eol=crlf
+results/paper_fig3_ridge_alpha_sensitivity.csv text eol=crlf
+results/paper_fig4_fusion_comparison.csv text eol=crlf
+results/paper_fig5_shap_importance.csv text eol=crlf
+results/paper_fig6_prediction_diagnostics.csv text eol=crlf
+results/pca95_ridge_cv_metrics.csv text eol=crlf
+results/pca95_ridge_summary.csv text eol=crlf
+results/random_forest_cv_metrics.csv text eol=crlf
+results/random_forest_summary.csv text eol=crlf
+results/ridge_alpha_tuning.csv text eol=crlf
+results/ridge_baseline_cv_metrics.csv text eol=crlf
+results/ridge_baseline_cv_mse.csv text eol=crlf
+results/ridge_baseline_summary.csv text eol=crlf
+results/shap_feature_importance.csv text eol=crlf
+results/target_descriptive_statistics.csv text eol=crlf
+results/test_predictions_all_models.csv text eol=crlf
+results/top_features_correlation_matrix.csv text eol=crlf
+results/tuning_comparison.csv text eol=crlf
+results/validation_strategy_comparison.csv text eol=crlf
+results/weighted_blend_error_analysis.csv text eol=crlf
+results/weighted_blending_search.csv text eol=crlf
+results/weighted_blending_summary.csv text eol=crlf
+results/xgboost_cv_metrics.csv text eol=crlf
+results/xgboost_summary.csv text eol=crlf

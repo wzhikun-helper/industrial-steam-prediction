@@ -1,0 +1,6 @@
+interface:
+  display_name: "ML Experiment Audit"
+  short_description: "Read-only validation, metrics and provenance audit"
+  default_prompt: "Use $ml-experiment-audit to audit this ML project's validation protocol and saved-result sources without training or modifying artifacts."
+policy:
+  allow_implicit_invocation: true

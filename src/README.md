@@ -6,6 +6,8 @@
 
 ## 文件说明
 
+工程迁移后的完整入口/安全边界见根README及docs/PYTHON_ENGINEERING_ACCEPTANCE.md。新增runtime.py/frozen.py负责隔离输出和严格注册表核验；validation.py及各experiment模块负责显式阶段；diagnostics.py/final_prediction.py仍只有合成测试接口，真实入口禁用。下文保留早期四模块说明，不应解读为当前只有四个模块或可默认训练。
+
 ### `data_utils.py`
 
 负责数据读取与基础拆分。

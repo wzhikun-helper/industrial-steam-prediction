@@ -1,0 +1,275 @@
+{
+  "ridge_step22_20261023_001": {
+    "mean_metrics.csv": [
+      {
+        "protocol": "TimeSeriesSplit",
+        "model": "Ridge",
+        "alpha": "1.0",
+        "mse": "0.13057163122601453",
+        "rmse": "0.3595388525744186",
+        "mae": "0.26431288062912284",
+        "r2": "0.8523057246546134"
+      },
+      {
+        "protocol": "TimeSeriesSplit",
+        "model": "Best Ridge",
+        "alpha": "5.0",
+        "mse": "0.13036913621734353",
+        "rmse": "0.35926161916722343",
+        "mae": "0.26393304240312343",
+        "r2": "0.8524957482770109"
+      },
+      {
+        "protocol": "KFold",
+        "model": "Ridge",
+        "alpha": "1.0",
+        "mse": "0.11295969367383722",
+        "rmse": "0.3353750495776565",
+        "mae": "0.2446807383241169",
+        "r2": "0.8826401737155918"
+      },
+      {
+        "protocol": "KFold",
+        "model": "Best Ridge",
+        "alpha": "5.0",
+        "mse": "0.11294028976877002",
+        "rmse": "0.335365259843336",
+        "mae": "0.24457354179322377",
+        "r2": "0.8826618504082134"
+      }
+    ],
+    "completion.json": {
+      "status": "complete",
+      "fits": 20
+    },
+    "metadata.json": {
+      "stage": "ridge-baseline",
+      "mode": "migration_consistency_check",
+      "versions": {
+        "python": "3.9.13",
+        "numpy": "1.24.4",
+        "pandas": "2.0.3",
+        "scipy": "1.10.1",
+        "scikit-learn": "1.6.1"
+      },
+      "status": "started"
+    },
+    "record_hashes": {
+      "comparison_report.md": "12caa56386f54acaffaac4336852d4a9d45b3684f27aa44a3b94227350e52ef2",
+      "completion.json": "6c4044dd2be603dd3842b21bad49a48acf483135303421fcbae4b5dabe5f3ba9",
+      "config_snapshot.json": "2653811244906dddedffaa8e550945ea143df78e6f3e744535818cb8a5474540",
+      "fold_metrics.csv": "5b676d2e0a6005fca53e073e8cdcffee50d3cdfa1b90ed452fee540c79434e1c",
+      "KFold_fold_indices.json": "284d537a6abbc5f0fc3c027adb1094a67aaeed3780b21bb606a8b8088502e8f6",
+      "mean_metrics.csv": "25eaf5f386b765d8b0beb2fa054cc7aea0271ba33a929a38fd5744fecb0fd678",
+      "metadata.json": "d8c68327c0bac2102d6aade61e7cc929499eef9e1e7d7d7c6fcfddda87c80572",
+      "TimeSeriesSplit_fold_indices.json": "0a999e1e48286ada7fd98c3dccda45949e5e66f7493c0fa6d27bfcba02cd3ba2"
+    }
+  },
+  "tree_step23_20261023_001": {
+    "mean_metrics.csv": [
+      {
+        "model": "Random Forest",
+        "mse": "0.15962148364051743",
+        "rmse": "0.39811123145580884",
+        "mae": "0.2997407512127512",
+        "r2": "0.8163998942397196"
+      },
+      {
+        "model": "GBDT",
+        "mse": "0.15495242125092729",
+        "rmse": "0.392688644442198",
+        "mae": "0.2963532506110142",
+        "r2": "0.8206827598340055"
+      },
+      {
+        "model": "XGBoost",
+        "mse": "0.14773271894614712",
+        "rmse": "0.38315081757146513",
+        "mae": "0.2877680932557415",
+        "r2": "0.8291975605531563"
+      },
+      {
+        "model": "LightGBM",
+        "mse": "0.15704848593438375",
+        "rmse": "0.39496346042698627",
+        "mae": "0.29897818133500936",
+        "r2": "0.8185607592739104"
+      }
+    ],
+    "completion.json": {
+      "execution": "complete",
+      "fits": 20,
+      "comparison": {
+        "Random Forest": "NUMERIC DIFFERENCE",
+        "GBDT": "NUMERIC DIFFERENCE",
+        "XGBoost": "NUMERIC DIFFERENCE",
+        "LightGBM": "PASS"
+      }
+    },
+    "metadata.json": {
+      "stage": "tree-baselines",
+      "mode": "migration_consistency_check",
+      "versions": {
+        "python": "3.9.13",
+        "numpy": "1.24.4",
+        "pandas": "2.0.3",
+        "scipy": "1.10.1",
+        "scikit-learn": "1.6.1",
+        "xgboost": "2.1.4",
+        "lightgbm": "4.6.0"
+      },
+      "tolerance": {
+        "atol": 1e-12,
+        "rtol": 1e-10
+      }
+    },
+    "record_hashes": {
+      "audit_notes.md": "3a8ddd819a7bb1e7cab0ab35bf0a0ec6261e79b3a7a0849760b21fb0ad2d9be6",
+      "comparison_report.md": "83061bf9fb0f9c4258ab660a08c8f91889801ca4e0f7df36a435470edf8871c4",
+      "completion.json": "ab482ddcf8b37705122c3fe7cdcc991244dfcc973ad792ad3371f2e6af061d2a",
+      "config_snapshot.json": "2653811244906dddedffaa8e550945ea143df78e6f3e744535818cb8a5474540",
+      "fold_indices.json": "0a999e1e48286ada7fd98c3dccda45949e5e66f7493c0fa6d27bfcba02cd3ba2",
+      "fold_metrics.csv": "f9fea770ac9cda078bab6ff952b9038d747a1d6fd4d98e5b908aff9bfb3cc3af",
+      "mean_metrics.csv": "bb2e067b70f1b8070762ca2b092855ac1dbe16b44918eee2b6bf0e45a37c3fdf",
+      "metadata.json": "1fe6e7314ed126eb7ef758e52767c17b83241d4efe10d40b3448e00cf20537c9"
+    }
+  },
+  "feature_step24_20261023_001": {
+    "mean_metrics.csv": [
+      {
+        "model": "Ridge",
+        "mse": "0.13057163122601453",
+        "rmse": "0.3595388525744186",
+        "mae": "0.26431288062912284",
+        "r2": "0.8523057246546134"
+      },
+      {
+        "model": "KBest20 + Ridge",
+        "mse": "0.1389270913048876",
+        "rmse": "0.37112473594178746",
+        "mae": "0.27364171646476765",
+        "r2": "0.8424471111297229"
+      },
+      {
+        "model": "PCA95 + Ridge",
+        "mse": "0.1680885873645775",
+        "rmse": "0.4084747756944561",
+        "mae": "0.3116359104908275",
+        "r2": "0.8074085791816566"
+      }
+    ],
+    "completion.json": {
+      "execution": "complete",
+      "comparison": "PASS",
+      "fits": 15
+    },
+    "metadata.json": {
+      "stage": "feature-processing",
+      "mode": "migration_consistency_check",
+      "versions": {
+        "python": "3.9.13",
+        "numpy": "1.24.4",
+        "pandas": "2.0.3",
+        "scipy": "1.10.1",
+        "scikit-learn": "1.6.1"
+      },
+      "tolerance": {
+        "atol": 1e-12,
+        "rtol": 1e-10
+      }
+    },
+    "record_hashes": {
+      "comparison_report.md": "c006613fbbe6c8ffe9eb31fe24b209c02677c7ca4bf2790a0baf511ce28a06bd",
+      "completion.json": "d5690583d3a92887549c7322304a63e6d06b87cf649142b8897eb59f3f55f38a",
+      "config_snapshot.json": "2653811244906dddedffaa8e550945ea143df78e6f3e744535818cb8a5474540",
+      "fold_indices.json": "0a999e1e48286ada7fd98c3dccda45949e5e66f7493c0fa6d27bfcba02cd3ba2",
+      "fold_metrics.csv": "7f1e6752dc854214b4e0c88a00f4c379874e632ef46a474bd17163cff236bb60",
+      "mean_metrics.csv": "f2c5dc44ca7f9af1fc3376b715bc6286ae839a84f20608147f679486692b335b",
+      "metadata.json": "fd3531a5500f887c5ae2cfecd4463389c794b65bf4bc3dafc11c0774e87b9187"
+    }
+  },
+  "ridge_tuning_step24_20261023_001": {
+    "completion.json": {
+      "execution": "complete",
+      "comparison": "PASS",
+      "fits": 51
+    },
+    "metadata.json": {
+      "stage": "ridge-tuning",
+      "mode": "migration_consistency_check",
+      "versions": {
+        "python": "3.9.13",
+        "numpy": "1.24.4",
+        "pandas": "2.0.3",
+        "scipy": "1.10.1",
+        "scikit-learn": "1.6.1"
+      },
+      "tolerance": {
+        "atol": 1e-12,
+        "rtol": 1e-10
+      }
+    },
+    "record_hashes": {
+      "comparison_report.md": "bfc68c4b3300b94d523f3adef9c03347b580d45cf5f5f3113fece24223551a75",
+      "completion.json": "62dddbd17368b5e5d045987dc282734e02adcdac0db46232dca54793a1c2bce6",
+      "config_snapshot.json": "2653811244906dddedffaa8e550945ea143df78e6f3e744535818cb8a5474540",
+      "fold_indices.json": "0a999e1e48286ada7fd98c3dccda45949e5e66f7493c0fa6d27bfcba02cd3ba2",
+      "metadata.json": "26fb5e8d003fbad245877298142156ca3cfd14c3288ca3d6aafa38bd6c9d0b23",
+      "selection.json": "29305c27052dbf9efe153356e01c14e9b1285de5fead0ea247ae27d70f0ab088",
+      "tuning_results.csv": "b9093f8a3fa5da777829456c455486d87e7c422bd86a6bb7954fcc9f7bf4612f"
+    }
+  },
+  "xgboost_step25_20261023_001": {
+    "completion.json": {
+      "execution": "complete",
+      "fits": 546
+    },
+    "metadata.json": {
+      "stage": "xgboost-tuning",
+      "mode": "migration_check",
+      "versions": {
+        "python": "3.9.13",
+        "numpy": "1.24.4",
+        "pandas": "2.0.3",
+        "scipy": "1.10.1",
+        "scikit-learn": "1.6.1",
+        "xgboost": "2.1.4"
+      }
+    },
+    "record_hashes": {
+      "comparison_report.md": "617aade750d9ea2acbb54704227cce7ac15395b87f5367d8aa1e61279651b593",
+      "completion.json": "9f8305b32fb10c027ada6c5e1a19e9cbbfa31eb105cba13113396f2d42bc51d5",
+      "config_snapshot.json": "2653811244906dddedffaa8e550945ea143df78e6f3e744535818cb8a5474540",
+      "fixed_best_fold_metrics.csv": "7b091e23840880249703abe6096a9361105e6afc524f9fb59751c1945d406626",
+      "fixed_best_mean_metrics.csv": "ad6f1e50273b295ef0bac9476701f52e94a6148adb44240bc1d53012618115a9",
+      "fixed_fold1_internal_config.json": "20c5063e725c94053269bac4a1a325e35da544a3b60e79543af3ec2fdca697c9",
+      "fixed_fold2_internal_config.json": "440311c5fcd113cedb22184464a35d4fb2aa442ba21fd32b02f983d17b778752",
+      "fixed_fold3_internal_config.json": "a29c67bf518d0a361e4b5b6fe1cf56c0dedb977de262a7bff77b8afadd5496c4",
+      "fixed_fold4_internal_config.json": "aaad47b358b5ccd6839211bebc7cdbbb6f8a0d9901291761c0e26dda645f60b0",
+      "fixed_fold5_internal_config.json": "d38425f403a5d7f84aebc1d86d0aa22a80b6b98ece1316f43c54c8a8f9b52aa9",
+      "fold_indices.json": "0a999e1e48286ada7fd98c3dccda45949e5e66f7493c0fa6d27bfcba02cd3ba2",
+      "metadata.json": "6143ef6f8f6097e173a0e9f4b826d63b5e952a6c7a5c9bcc1d82320757d2164e",
+      "search_best_internal_config.json": "cb3dd23606b5dfccf17bacd0d827419263db0c0055a5b972b6ed93d63ffe391d",
+      "search_results.csv": "1429e343ef43b78326f039eebba584bc64fe7678c4ec3d550c3c041ea082ee77",
+      "search_selection.json": "41f14c730ecc67bc95021453806179526f1587aad4fa8622f1c82155021294a8"
+    }
+  },
+  "paper_export_step27_20261023_001": {
+    "completion.json": {
+      "status": "complete"
+    },
+    "record_hashes": {
+      "completion.json": "e629895462c8b9f465012a4bc0ffe6063390b709ed86afff0bd6b6cee0777988",
+      "export_manifest.json": "b3d9640f1f7b8d88e973b9d4498aca2cb18d3c3446b2f88e0336f5669e162451",
+      "paper_fig1_target_distribution.csv": "06da8f11f0cf53290c737acd90f396ba7d777ead2c7115947b348775fb85a0f7",
+      "paper_fig2_model_performance.csv": "386e92830a0562d463fcf6b6907557ceccd7ea491ccb035df86bb8d63dea4ad7",
+      "paper_fig3_feature_method_comparison.csv": "1731d6595e2f1d31360d2294ccda778a474dd3b19b7478c1d9c3c1a67e257c8b",
+      "paper_fig3_ridge_alpha_sensitivity.csv": "28dc730487600d37a97781d8efc787c42f6d365df1d2de794e9bb0d9bc570187",
+      "paper_fig4_fusion_comparison.csv": "932a9eebb00882f84d9fefca8cf7df2c5f6c037953a0827eae6562fe190782a8",
+      "paper_fig5_shap_importance.csv": "7f75a7d99e267d48b002c93f124368e8932e62fc67b0b49a2832a7eef33d4f10",
+      "paper_fig6_prediction_diagnostics.csv": "7be7c34ea58e6004f36c3bebc22768a565d2aac69059db45d1a0e0db47dcfc13",
+      "tuning_comparison.csv": "7ea68d2747944422c4efc28d0535d8ab942e7ae64444ce2995a1c5dee83a154a",
+      "validation_report.md": "3f80279bc23cee1b9813dcd919555618660ecd38111f19657983d87a19ea7677"
+    }
+  }
+}

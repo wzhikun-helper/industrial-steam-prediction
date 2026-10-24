@@ -95,11 +95,15 @@ colsample_bytree = 1.0
 主要来源：
 
 - `fusion_model_comparison.csv`
-- `weighted_blending_summary.csv`
 
 辅助来源：
 
 - `weighted_blending_search.csv`
+- `weighted_blending_summary.csv`：融合权重搜索阶段同池 OOF 结果，其 MSE 0.12595591736078293 不得作为论文最终融合结果。
+
+最终比较以 `fusion_model_comparison.csv` 为准：Weighted Blend MSE = 0.17659368600599726，Best Ridge MSE = 0.1769213533906335。`paper_fig6_prediction_diagnostics.csv` 保存对应的 481 个验证样本。
+
+最后 481 个样本未用于最终融合权重选择；但上游超参数开发过程可能已经使用相关标签信息，因此该集合独立于融合权重拟合，并非严格外部测试集。不同验证口径不得直接横向比较。
 
 当前融合权重：
 

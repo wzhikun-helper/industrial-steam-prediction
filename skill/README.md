@@ -4,7 +4,7 @@
 
 ## Canonical
 
-`steam_prediction_skill_v2_final.md` 是当前推荐的 canonical 工作流。
+`steam_prediction_skill_v2_final.md` 保留为历史实验流程说明，不是可发现的标准Skill，也不构成重新训练授权。当前标准只读审计入口在 `.agents/skills/ml-experiment-audit/SKILL.md`；真实触发证据见 `docs/ML_EXPERIMENT_AUDIT_SKILL_ACCEPTANCE.md`。
 
 ## Historical versions
 

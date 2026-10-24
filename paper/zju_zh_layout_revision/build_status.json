@@ -1,0 +1,22 @@
+[
+  {
+    "exit_code": 0,
+    "command": "xelatex --disable-installer -interaction=nonstopmode -halt-on-error main.tex",
+    "log": "build_1_xelatex.txt"
+  },
+  {
+    "exit_code": 0,
+    "command": "bibtex --disable-installer main",
+    "log": "build_2_bibtex.txt"
+  },
+  {
+    "exit_code": 0,
+    "command": "xelatex --disable-installer -interaction=nonstopmode -halt-on-error main.tex",
+    "log": "build_3_xelatex.txt"
+  },
+  {
+    "exit_code": 0,
+    "command": "xelatex --disable-installer -interaction=nonstopmode -halt-on-error main.tex",
+    "log": "build_4_xelatex.txt"
+  }
+]

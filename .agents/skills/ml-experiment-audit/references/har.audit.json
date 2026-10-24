@@ -1,0 +1,6 @@
+{
+  "task": "classification",
+  "metrics": ["accuracy", "macro_f1"],
+  "required_files": ["configs/formal_seed42.yaml", "src/dataset.py", "scripts/evaluate.py", "scripts/fit_normalizer.py", "results/dataset_split.csv", "results/formal_seed42/summary.json", "results/formal_seed42/test/evaluation_metadata.json", "results/formal_seed42/test/test_metrics.json"],
+  "split_metadata": {"path": "results/dataset_split.csv", "sample_column": "sample_id", "group_column": "participant_id", "split_column": "split"}
+}

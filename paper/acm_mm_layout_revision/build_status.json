@@ -1,0 +1,22 @@
+[
+  {
+    "log": "build_1_pdflatex.txt",
+    "command": "pdflatex --disable-installer -interaction=nonstopmode -halt-on-error main.tex",
+    "exit_code": 0
+  },
+  {
+    "log": "build_2_bibtex.txt",
+    "command": "bibtex --disable-installer main",
+    "exit_code": 0
+  },
+  {
+    "log": "build_3_pdflatex.txt",
+    "command": "pdflatex --disable-installer -interaction=nonstopmode -halt-on-error main.tex",
+    "exit_code": 0
+  },
+  {
+    "log": "build_4_pdflatex.txt",
+    "command": "pdflatex --disable-installer -interaction=nonstopmode -halt-on-error main.tex",
+    "exit_code": 0
+  }
+]

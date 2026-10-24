@@ -1,0 +1,5 @@
+{
+  "task": "regression",
+  "metrics": ["mse", "rmse", "mae", "r2"],
+  "required_files": ["configs/experiment.yaml", "src/data_utils.py", "src/evaluation.py", "src/models.py", "src/validation.py", "src/runtime.py", "results/paper_result_manifest.md", "results/fusion_model_comparison.csv", "results/frozen_artifacts_sha256.md"]
+}
