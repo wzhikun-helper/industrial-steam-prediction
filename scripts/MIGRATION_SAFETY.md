@@ -1,5 +1,7 @@
 # 安全迁移与冻结来源
 
+这是第20步建立边界时的历史记录；文末“尚无统一入口”描述当时状态。第21–33步的当前入口、已完成能力和发布验收请以根README及docs/FINAL_PROJECT_ACCEPTANCE.md为准，不据此重跑历史Notebook。
+
 ## 输出约定
 
 现有 results/、models/、figures/paper/ 和两套论文目录默认按只读处理；这是项目执行约定，尚未施加操作系统 ACL。现有绘图脚本和 Notebook 仍能覆盖文件，执行前必须检查写入目标。

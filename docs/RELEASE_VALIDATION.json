@@ -1,0 +1,271 @@
+{
+  "date": "2026-10-24",
+  "status": "FULL PASS within Step33 delivery scope",
+  "release_commit": "85c3200747e3cd8af05c8a6a076e731440c4c9ee",
+  "historical_head": "508c8e1a974b7869c7ce4143028cfe224b4ede64",
+  "local": {
+    "status": "PASS",
+    "checks": [
+      {
+        "check": "required_delivery_files",
+        "exit_code": 0,
+        "missing": []
+      },
+      {
+        "check": "unit_tests",
+        "exit_code": 0,
+        "total": 57,
+        "skipped": 1,
+        "passed": 56
+      },
+      {
+        "check": "skill_tests",
+        "exit_code": 0,
+        "total": 20,
+        "skipped": 1,
+        "passed": 19
+      },
+      {
+        "check": "official_skill_validation",
+        "exit_code": 0
+      },
+      {
+        "check": "help_run_experiment",
+        "exit_code": 0
+      },
+      {
+        "check": "help_export_paper_results",
+        "exit_code": 0
+      },
+      {
+        "check": "help_verify_frozen_results",
+        "exit_code": 0
+      },
+      {
+        "check": "help_check_delivery",
+        "exit_code": 0
+      },
+      {
+        "check": "help_check_skill_discovery",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_ridge-baseline",
+        "exit_code": 0
+      },
+      {
+        "check": "dry_run_ridge-baseline",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_tree-baselines",
+        "exit_code": 0
+      },
+      {
+        "check": "dry_run_tree-baselines",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_feature-processing",
+        "exit_code": 0
+      },
+      {
+        "check": "dry_run_feature-processing",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_ridge-tuning",
+        "exit_code": 0
+      },
+      {
+        "check": "dry_run_ridge-tuning",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_xgboost-tuning",
+        "exit_code": 0
+      },
+      {
+        "check": "dry_run_xgboost-tuning",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_fusion",
+        "exit_code": 0
+      },
+      {
+        "check": "dry_run_fusion",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_shap",
+        "exit_code": 0
+      },
+      {
+        "check": "dry_run_shap",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_final-prediction",
+        "exit_code": 0
+      },
+      {
+        "check": "dry_run_final-prediction",
+        "exit_code": 0
+      },
+      {
+        "check": "frozen_hashes_optimized",
+        "exit_code": 0
+      },
+      {
+        "check": "export_dry_run",
+        "exit_code": 0
+      }
+    ],
+    "unused_outputs_created": 0,
+    "data_schema_dry_runs": true,
+    "training_executed": false,
+    "paper_compilation_performed": false,
+    "notebook_sha256": "807341c2b04b69c76de2131be29efa424958f49a3a2110759125ee598659b9be",
+    "notebook_note": "Working-copy identity only; unpublished Notebook changes are not a Fresh Clone prerequisite."
+  },
+  "fresh_clone": {
+    "status": "PASS",
+    "checks": [
+      {
+        "check": "required_delivery_files",
+        "exit_code": 0,
+        "missing": []
+      },
+      {
+        "check": "unit_tests",
+        "exit_code": 0,
+        "total": 57,
+        "skipped": 1,
+        "passed": 56
+      },
+      {
+        "check": "skill_tests",
+        "exit_code": 0,
+        "total": 20,
+        "skipped": 1,
+        "passed": 19
+      },
+      {
+        "check": "official_skill_validation",
+        "exit_code": 0
+      },
+      {
+        "check": "help_run_experiment",
+        "exit_code": 0
+      },
+      {
+        "check": "help_export_paper_results",
+        "exit_code": 0
+      },
+      {
+        "check": "help_verify_frozen_results",
+        "exit_code": 0
+      },
+      {
+        "check": "help_check_delivery",
+        "exit_code": 0
+      },
+      {
+        "check": "help_check_skill_discovery",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_ridge-baseline",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_tree-baselines",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_feature-processing",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_ridge-tuning",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_xgboost-tuning",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_fusion",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_shap",
+        "exit_code": 0
+      },
+      {
+        "check": "check_only_final-prediction",
+        "exit_code": 0
+      },
+      {
+        "check": "frozen_hashes_optimized",
+        "exit_code": 0
+      },
+      {
+        "check": "export_dry_run",
+        "exit_code": 0
+      }
+    ],
+    "unused_outputs_created": 0,
+    "data_schema_dry_runs": false,
+    "training_executed": false,
+    "paper_compilation_performed": false,
+    "notebook_sha256": "4f16d2fb73ea396ce5d2d8005425bba57b3104d795986b4cc0be2ac1edeba55a",
+    "notebook_note": "Working-copy identity only; unpublished Notebook changes are not a Fresh Clone prerequisite."
+  },
+  "clone_skill_discovery": {
+    "status": "PASS",
+    "enabled_repo_matches": 1,
+    "other_matching_scopes": [
+      "user"
+    ],
+    "repo_path": ".agents/skills/ml-experiment-audit/SKILL.md",
+    "server_version": "Codex Desktop/0.145.0 (Windows 10.0.26200; x86_64) dumb (delivery-discovery; 1.0)",
+    "model_turn_started": false,
+    "raw_data_read": false
+  },
+  "frozen_artifacts_matched": 89,
+  "frozen_git_blobs_changed": 0,
+  "private_raw_files_in_clone": 0,
+  "notebook_working_changes_published": false,
+  "paper_checks": {
+    "english_pages": 6,
+    "chinese_pages": 7,
+    "all_13_pages_rendered_and_visually_reviewed": true,
+    "all_13_rendered_pages_pixel_identical": true,
+    "body_numbers_tables_equations_citations_unchanged": true,
+    "references_each": 28,
+    "figure_pages_each": [
+      2,
+      3,
+      4,
+      4,
+      4,
+      5
+    ],
+    "english_table_pages": [
+      3,
+      3,
+      4
+    ],
+    "chinese_table_pages": [
+      4,
+      5,
+      5,
+      5
+    ]
+  },
+  "environment_note": "Uses installed dependencies; no new-machine install, no training, no OOF/SHAP/inference. Each suite skipped one Windows real-symlink permission test; not counted passed.",
+  "initial_release_commit": "91c12e3dd124a42cf965d4b2050db124e1629329",
+  "protocol_delivery_fix": "Three referenced protocol documents were omitted initially, added in a normal follow-up commit; required-delivery-file and discovery-help checks now pass in the fresh clone."
+}
