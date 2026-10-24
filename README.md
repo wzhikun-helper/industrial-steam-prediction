@@ -140,6 +140,33 @@ Notebook原有611行工作区修改的发布归属未确认，本次**没有提�
 
 ## 安全与最终状态
 
+### 显式授权的CSV→图表→示范PDF工作流（不训练）
+
+普通审计仍默认只读。只有明确要求生成示范成果时，才执行仓库Skill的
+`references/report-workflow.md`分支；用户级安装副本不自动同步。当前示范适配器
+只支持本项目已冻结的回归CSV，不读取原始数据或模型，也不混排五折CV与融合验证结果。
+
+```powershell
+python -B .agents/skills/ml-experiment-audit/scripts/build_demo_report.py --project-root . --output-dir staging/my_unique_demo --check-only
+# 以下命令仅在用户明确授权生成示范成果后运行；目标目录必须不存在。
+python -B .agents/skills/ml-experiment-audit/scripts/build_demo_report.py --project-root . --output-dir staging/my_unique_demo --authorize-demo
+python -B .agents/skills/ml-experiment-audit/scripts/verify_demo_report.py --project-root . --run-dir staging/my_unique_demo
+python -B .agents/skills/ml-experiment-audit/scripts/test_report_workflow.py
+```
+
+构建使用现有matplotlib PdfPages及Poppler，不安装依赖。两页渲染须全部实际查看，
+再记录带每页SHA256的`visual_review.json`并运行验证器；编译/构建成功不等于视觉PASS。
+没有视觉记录时只返回等待视觉验收，不生成成功标记。具体证据与限制见
+`docs/END_TO_END_SKILL_WORKFLOW_ACCEPTANCE.md`。
+
 本仓库不包含私有原始数据，不自动上传数据。历史模型文件只应在可信环境按版本加载；哈希不等于反序列化安全。输出guard是工程边界，不是对抗并发攻击的完整OS沙箱。不要删除旧Notebook、覆盖冻结结果、重跑正式图或为了数值一致反复调参。
 
 最终发布/Fresh Clone结果、测试数量、提交身份和未解决问题见 docs/FINAL_PROJECT_ACCEPTANCE.md。保留原研究的匿名特征、非嵌套选模、融合独立性和跨版本差异限制。
+
+### 第三次学习规划收尾
+
+第35步归档结论：**端到端生成已实测成功、独立会话生成受执行策略限制**。
+现有冻结CSV到新图表、示范PDF及逐页视觉检查已在父会话实际完成；独立新会话
+成功加载Skill，但生成执行遭策略拦截，因此总验收保持PARTIAL PASS，不宣称独立
+会话端到端完全通过。详见`docs/END_TO_END_SKILL_WORKFLOW_ACCEPTANCE.md`。
+第三次学习规划结束，未解决的环境限制如实保留，不自动继续第36步或新实验。

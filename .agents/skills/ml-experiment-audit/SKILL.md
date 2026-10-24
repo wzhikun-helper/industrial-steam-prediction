@@ -1,6 +1,6 @@
 ---
 name: ml-experiment-audit
-description: Read-only audit of machine-learning experiment validation protocols, preprocessing leakage, regression or classification metric definitions, saved-result provenance, and frozen artifacts. Use for ML experiment reproducibility or validation/source audits, including industrial regression and participant-split HAR; not for ordinary prose polishing, general Git queries, or implementing/training models.
+description: Audit ML validation, metrics, leakage and frozen-result provenance, read-only by default. Also build an isolated saved-CSV to figures to PDF demonstration only when explicitly authorized. Use for regression or classification experiment audits; not ordinary prose polishing, general Git queries or model training.
 ---
 
 # ML experiment audit
@@ -19,11 +19,21 @@ UNVERIFIED if it cannot be established without additional permission. Hashing a 
 as bytes is permitted; deserializing it is not needed for this audit.
 
 Read [frozen-protection.md](references/frozen-protection.md) before executing checks.
-Keep a baseline of relevant frozen hashes and Git status. No report files are created
-by the helper CLIs: they print JSON to stdout. If report creation is requested, use
+Keep a baseline of relevant frozen hashes and Git status. The read-only check_project
+and check_hashes CLIs create no report files: they print JSON to stdout. If report creation is requested, use
 an explicitly authorized fresh project output directory and the project's existing
 runtime guard (for example src/runtime.py); refuse existing directories and linked
 escape paths. Do not substitute these helpers for that write guard.
+
+## Explicitly authorized demonstration (not the default audit)
+
+Only when the user expressly requests generating a demonstration from saved CSVs,
+read [report-workflow.md](references/report-workflow.md). This narrowly authorizes
+new plots, a new report and page renders in a fresh staging run, never training,
+inference, raw-data access or changes to frozen artifacts. Audit-only requests still
+use the workflow below and stdout-only audit helpers. An execution CLI switch records
+authorization; it cannot supply human authorization that was not actually given.
+Do not synchronize this repository copy to a user-level installation automatically.
 
 ## Audit workflow
 
@@ -67,7 +77,7 @@ required_files; it is an audit specification, NOT a replacement for the experime
 YAML. A profile may be given by an explicit absolute path outside project root;
 referenced project files must still stay within root and outside private/raw paths.
 Optional `--output-dir` only checks a future output path; it does not create it.
-No training/write/overwrite flags exist. Nonzero exit means evidence or safety check
+These two audit helpers have no training/write/overwrite flags. Nonzero exit means evidence or safety check
 failed. Source-level reasoning is still required after a helper succeeds.
 
 For these two projects only, read [project-sources.md](references/project-sources.md)
