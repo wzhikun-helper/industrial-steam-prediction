@@ -17,6 +17,11 @@ from src.runtime import create_run_dir, open_new_output
 
 STAGES=('ridge-baseline','tree-baselines','feature-processing','ridge-tuning',
         'xgboost-tuning','fusion','shap','final-prediction')
+REQUIRED_FILES=('README.md','environment.yml','configs/experiment.yaml',
+                'scripts/FUSION_PROTOCOL.md','scripts/MIGRATION_SAFETY.md',
+                'scripts/REMAINING_PROTOCOLS.md','docs/FINAL_PROJECT_ACCEPTANCE.md',
+                '.agents/skills/ml-experiment-audit/SKILL.md',
+                'paper/acm_mm_layout_revision/BUILD.md','paper/zju_zh_layout_revision/BUILD.md')
 
 
 def main():
@@ -27,6 +32,8 @@ def main():
     args=parser.parse_args()
     create_run_dir(ROOT,args.output_dir)
     checks=[]
+    missing=[p for p in REQUIRED_FILES if not (ROOT/p).is_file()]
+    checks.append({'check':'required_delivery_files','exit_code':2 if missing else 0,'missing':missing})
 
     def save(name,data):
         with open_new_output(ROOT,args.output_dir,name) as stream:
@@ -51,7 +58,7 @@ def main():
     check('skill_tests',py+['.agents/skills/ml-experiment-audit/scripts/test_checks.py'])
     if args.official_validator:
         check('official_skill_validation',py+[args.official_validator,'.agents/skills/ml-experiment-audit'])
-    for script in ('run_experiment','export_paper_results','verify_frozen_results','check_delivery'):
+    for script in ('run_experiment','export_paper_results','verify_frozen_results','check_delivery','check_skill_discovery'):
         check('help_'+script,py+['scripts/'+script+'.py','--help'])
     for stage in STAGES:
         base=py+['scripts/run_experiment.py','--config','configs/experiment.yaml','--stage',stage,
