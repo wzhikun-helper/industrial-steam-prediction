@@ -2,6 +2,26 @@
 
 工业蒸汽量回归研究与安全复现工程。结果已经冻结；本仓库不宣称 SOTA、统计显著性、完整端到端重训复现或正式投稿全规范通过。
 
+## 课程作业交付导航
+
+老师优先查看下列修订稿。它们是已验收的学习交付稿，并非宣称已完全满足正式投稿要求。
+
+| 交付内容 | 入口 |
+|---|---|
+| 中文最终修订论文 | [PDF](paper/zju_zh_layout_revision/main.pdf) · [LaTeX源码](paper/zju_zh_layout_revision/main.tex) · [构建说明](paper/zju_zh_layout_revision/BUILD.md) |
+| 英文最终修订论文 | [PDF](paper/acm_mm_layout_revision/main.pdf) · [LaTeX源码](paper/acm_mm_layout_revision/main.tex) · [构建说明](paper/acm_mm_layout_revision/BUILD.md) |
+| LaTeX排版学习总结 | [学习笔记](docs/LATEX_LAYOUT_LEARNING_NOTES.md) |
+| 真实已发表论文对照 | [第34步对照报告及合法来源链接](docs/PUBLISHED_PAPER_LAYOUT_COMPARISON.md) |
+| Python工程使用与验收 | [使用方法](scripts/README.md) · [工程验收](docs/PYTHON_ENGINEERING_ACCEPTANCE.md) |
+| Skill说明与示范 | [标准Skill](.agents/skills/ml-experiment-audit/SKILL.md) · [两页示范PDF](docs/ml_workflow_demo.pdf) · [第35步验收](docs/END_TO_END_SKILL_WORKFLOW_ACCEPTANCE.md) |
+| 复现限制及结果来源 | [最终验收](docs/FINAL_PROJECT_ACCEPTANCE.md) · [冻结来源说明](results/paper_result_manifest.md) |
+| 全部学习材料及本次归档 | [文档索引](docs/README.md) · [清理与验收记录](docs/COURSE_DELIVERY_CLEANUP.md) |
+
+`paper/acm_mm/`、`paper/zju_zh/` 是冻结历史原稿；保留作修改对照，不再原地编译。
+`paper/*_layout_revision/` 是优先阅读的修订稿；后续构建也应复制到隔离目录，避免覆盖已验收PDF。
+第三方论文全文、完整页面截图、实验运行日志及失败触发证据仅在本地隔离目录保留，不随公开仓库分发。
+示范PDF是第35步已验收产物的字节副本，不是新实验；**端到端生成已实测成功、独立会话生成受执行策略限制**。
+
 ## 数据与结论边界
 
 训练数据为2,888行、38个匿名特征 V0–V37 和 target；无标签测试数据为1,925行、38列。原始数据不随Git发布，请自行依据数据提供方授权取得并放到：
