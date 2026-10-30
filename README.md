@@ -1,192 +1,115 @@
 # Industrial Steam Prediction
 
-工业蒸汽量回归研究与安全复现工程。结果已经冻结；本仓库不宣称 SOTA、统计显著性、完整端到端重训复现或正式投稿全规范通过。
+**工业蒸汽量预测：正则化回归、树模型比较与可追溯实验工程。**
 
-## 课程作业交付导航
+A reproducibility-focused regression study with fixed validation protocols, model comparisons, model-specific SHAP analysis, and bilingual research manuscripts.
 
-老师优先查看下列修订稿。它们是已验收的学习交付稿，并非宣称已完全满足正式投稿要求。
+[中文论文](paper/zju_zh_layout_revision/main.pdf) · [English manuscript](paper/acm_mm_layout_revision/main.pdf) · [快速开始](#快速开始) · [复现指南](docs/REPRODUCIBILITY.md) · [文档导航](docs/README.md)
 
-| 交付内容 | 入口 |
+## 项目概览
+
+使用38个匿名特征预测工业蒸汽量，比较线性模型、树模型、特征处理和融合方案，并将Notebook实验整理为配置驱动、输出隔离、可测试的Python工程。
+
+本项目关注三个问题：
+
+- **基线是否足够强？** Ridge在当前数据与验证设置下优于所比较的树模型。
+- **额外处理是否有收益？** KBest20、PCA95未改善Ridge；Ridge调参收益较小。
+- **融合与解释能说明什么？** 融合仅有边际数值改善；SHAP只解释Best XGBoost分支。
+
+| 项目 | 设置 |
 |---|---|
-| 中文最终修订论文 | [PDF](paper/zju_zh_layout_revision/main.pdf) · [LaTeX源码](paper/zju_zh_layout_revision/main.tex) · [构建说明](paper/zju_zh_layout_revision/BUILD.md) |
-| 英文最终修订论文 | [PDF](paper/acm_mm_layout_revision/main.pdf) · [LaTeX源码](paper/acm_mm_layout_revision/main.tex) · [构建说明](paper/acm_mm_layout_revision/BUILD.md) |
-| LaTeX排版学习总结 | [学习笔记](docs/LATEX_LAYOUT_LEARNING_NOTES.md) |
-| 真实已发表论文对照 | [第34步对照报告及合法来源链接](docs/PUBLISHED_PAPER_LAYOUT_COMPARISON.md) |
-| Python工程使用与验收 | [使用方法](scripts/README.md) · [工程验收](docs/PYTHON_ENGINEERING_ACCEPTANCE.md) |
-| Skill说明与示范 | [标准Skill](.agents/skills/ml-experiment-audit/SKILL.md) · [两页示范PDF](docs/ml_workflow_demo.pdf) · [第35步验收](docs/END_TO_END_SKILL_WORKFLOW_ACCEPTANCE.md) |
-| 复现限制及结果来源 | [最终验收](docs/FINAL_PROJECT_ACCEPTANCE.md) · [冻结来源说明](results/paper_result_manifest.md) |
-| 全部学习材料及本次归档 | [文档索引](docs/README.md) · [清理与验收记录](docs/COURSE_DELIVERY_CLEANUP.md) |
+| 有标签数据 | 2,888行，38个特征V0–V37，标签target |
+| 无标签测试数据 | 1,925行；不报告真实性能指标 |
+| 主验证协议 | 5折TimeSeriesSplit；KFold仅作敏感性分析 |
+| 模型 | Ridge、Random Forest、GBDT、XGBoost、LightGBM及融合模型 |
+| 工程 | 配置驱动CLI、折内Pipeline、安全输出、合成测试、结果来源核验 |
 
-`paper/acm_mm/`、`paper/zju_zh/` 是冻结历史原稿；保留作修改对照，不再原地编译。
-`paper/*_layout_revision/` 是优先阅读的修订稿；后续构建也应复制到隔离目录，避免覆盖已验收PDF。
-第三方论文全文、完整页面截图、实验运行日志及失败触发证据仅在本地隔离目录保留，不随公开仓库分发。
-示范PDF是第35步已验收产物的字节副本，不是新实验；**端到端生成已实测成功、独立会话生成受执行策略限制**。
+## 主要结果
 
-## 数据与结论边界
+### 五折模型比较
 
-训练数据为2,888行、38个匿名特征 V0–V37 和 target；无标签测试数据为1,925行、38列。原始数据不随Git发布，请自行依据数据提供方授权取得并放到：
+以下为已归档的五折TimeSeriesSplit结果，RMSE为逐折RMSE的平均值。
 
-```text
-data/raw/zhengqi_train.txt
-data/raw/zhengqi_test.txt
+| 模型 | MSE ↓ | RMSE ↓ | MAE ↓ | R² ↑ |
+|---|---:|---:|---:|---:|
+| Best Ridge（α=5） | **0.1304** | 0.3593 | 0.2639 | 0.8525 |
+| Ridge（α=1） | 0.1306 | 0.3595 | 0.2643 | 0.8523 |
+| Best XGBoost | 0.1498 | 0.3858 | 0.2888 | 0.8261 |
+| XGBoost | 0.1542 | 0.3915 | 0.2952 | 0.8203 |
+| GBDT | 0.1550 | 0.3927 | 0.2964 | 0.8207 |
+| LightGBM | 0.1570 | 0.3950 | 0.2990 | 0.8186 |
+| Random Forest | 0.1596 | 0.3981 | 0.2997 | 0.8164 |
+
+来源：[完整精度CSV](results/final_model_comparison.csv)。Best Ridge与普通Ridge数值接近，不将差距解释为显著提升。
+
+![Five-fold model comparison with standard-deviation error bars](figures/paper/fig2_model_performance.png)
+
+*误差棒为五折之间的±1 SD，不是置信区间。*
+
+### 融合验证：不同协议，单独比较
+
+| 模型 | 481样本融合验证MSE ↓ |
+|---|---:|
+| Weighted Blend（0.7 Ridge + 0.3 XGBoost） | **0.176594** |
+| Best Ridge | 0.176921 |
+| Stacking | 0.178956 |
+| Best XGBoost | 0.196809 |
+
+来源：[融合比较CSV](results/fusion_model_comparison.csv)。Weighted Blend相对Best Ridge仅改善约**0.19%**，属于边际数值收益。
+
+该子集未用于融合权重选择或Stacking元模型拟合，但上游调参可能使用过其标签，因此不是严格独立外部测试集。不能将上表与五折结果混为同一排行榜。
+
+## 快速开始
+
+```bash
+git clone https://github.com/wzhikun-helper/industrial-steam-prediction.git
+cd industrial-steam-prediction
 ```
 
-二者均为带表头的制表符分隔文本；精确列序和形状见 configs/experiment.yaml。不提供未经核实的下载地址或数据再分发许可。异常工业样本不因误差大而删除。
+环境声明见[environment.yml](environment.yml)。在独立环境中准备依赖后，可**不使用原始数据、不训练模型**地运行：
 
-主协议为5折 TimeSeriesSplit；KFold只是敏感性分析，时间语义尚未完全确认。CV RMSE是逐折RMSE的算术平均，而非平均MSE开方。
-
-- 冻结 Best Ridge：alpha=5，平均MSE=0.130369（展示值0.1304）。
-- 历史 Best XGBoost：平均MSE=0.149834；不要用当前环境的重算值替换它。
-- 最后481个融合验证样本上，Weighted Blend MSE=0.176594，同集合Best Ridge为0.176921，改善仅约0.19%；权重0.7/0.3。
-- 这481样本未参与权重选择或Stacking元模型拟合，但上游调参可能使用过标签，**不是严格独立外部测试集**。
-- 约0.125956属于全OOF池权重搜索阶段，不是最终验证性能。
-- SHAP仅解释Best XGBoost，平均绝对SHAP不表示方向、因果或显著性。
-- 无标签测试数据不能计算真实性能指标。
-
-## 工程结构
-
-```text
-.agents/skills/ml-experiment-audit/  标准只读审计Skill
-configs/experiment.yaml            固定协议，JSON语法的YAML 1.2子集
-src/                              数据、模型、CV、诊断及安全输出模块
-scripts/run_experiment.py          八阶段统一入口
-scripts/export_paper_results.py    注册来源校验后的CSV字节导出
-scripts/verify_frozen_results.py    严格89文件注册表与来源核验
-scripts/figures/                   历史正式图脚本，默认不要重跑
-tests/                            合成离线测试
-results/                          冻结CSV、来源及89文件哈希清单
-models/                           冻结模型，审计不反序列化
-figures/paper/                    冻结中英文正式图
-notebooks/                        历史Notebook及覆盖风险登记
-paper/acm_mm/、paper/zju_zh/       原冻结论文，禁止原地编译
-paper/*_layout_revision/           独立修订源码、PDF和构建说明
-docs/                             历史验收、限制及最终交付报告
-skill/                            旧流程文档与演进记录，不是自动触发入口
-staging/、reproduction/            本地隔离产物，Git忽略
-```
-
-## 环境
-
-原声明环境在 environment.yml，可在有授权的机器上创建：
-
-```powershell
-conda env create -f environment.yml
-conda activate steam-prediction
-```
-
-声明环境不等于已验证的历史全流程环境。本次Fresh Clone复用当前已安装依赖，没有执行新机器安装。已验证运行环境和冻结模型内部版本线索见 docs/PYTHON_ENGINEERING_ACCEPTANCE.md；不同版本可能产生差异，不能为匹配旧值修改参数。配置文件虽名为yaml，入口目前使用json.loads，只支持其JSON子集。
-
-## 无数据预检与离线测试
-
-在仓库根目录执行：
-
-```powershell
-python -B -m unittest discover -s tests -v
-python -B .agents/skills/ml-experiment-audit/scripts/test_checks.py
+```bash
 python -B scripts/run_experiment.py --help
-python -B scripts/run_experiment.py --config configs/experiment.yaml --output-dir staging/config_check_001 --stage ridge-baseline --check-only
+python -B scripts/run_experiment.py --config configs/experiment.yaml --output-dir staging/readme_check_001 --stage ridge-baseline --check-only
+python -B -m unittest discover -s tests -v
 python -B scripts/verify_frozen_results.py --hashes-only
 ```
 
-check-only不需要或读取原始数据，不拟合模型、不创建输出；明确报告data_available及raw_schema_checked=false，不能替代真实Schema检查。目录名必须尚不存在。
+check-only不拟合、不创建输出目录，也不检查真实数据Schema。目标目录必须不存在。数据准备、八阶段能力和复现差异见[复现指南](docs/REPRODUCIBILITY.md)。原始数据不随仓库分发。
 
-取得授权数据后，可只检查数据Schema：
+## 论文与研究材料
 
-```powershell
-python -B scripts/run_experiment.py --config configs/experiment.yaml --output-dir staging/data_check_001 --stage ridge-baseline --dry-run
-```
-
-前五阶段dry-run读取数据、验证Schema，不训练；后三阶段dry-run只做协议/文件可用性/输出路径预检，不读取数据。单元测试使用临时合成数据，不把其中结果当论文指标。Windows真实symlink权限测试可能跳过，需阅读跳过原因。
-
-## 八阶段能力矩阵
-
-| stage | 当前能力 | 本轮/默认安全边界 |
-|---|---|---|
-| ridge-baseline | 固定alpha=1/5，TSS/KFold评价 | 只有显式非预检调用才训练 |
-| tree-baselines | RF/GBDT/XGB/LGBM未调参基线 | 同上 |
-| feature-processing | Ridge、KBest20、PCA95 | 同上 |
-| ridge-tuning | 原10个alpha搜索 | 同上 |
-| xgboost-tuning | 原108候选，固定历史Best另评 | 同上 |
-| fusion | OOF/开发-验证划分协议预检 | 真实入口禁用 |
-| shap | 文件/路径预检，合成explainer接口 | 真实重算禁用 |
-| final-prediction | 文件/路径预检，合成函数测试 | 真实训练/预测禁用 |
-
-所有阶段支持 --check-only；数据具备时均支持 --dry-run。没有授权不要去掉预检开关。本轮没有真实训练、搜索、OOF、SHAP或测试推理。原结果目录拒绝作为输出；staging/reproduction下已有目录（包括空目录）也拒绝覆盖。
-
-## 已有数值复现状态
-
-| 内容 | 已归档状态，不是本轮重跑 |
+| 内容 | 入口 |
 |---|---|
-| Ridge、特征处理、Ridge调参 | 严格容差内一致 |
-| LightGBM基线 | 严格容差内一致 |
-| Random Forest、GBDT | 小幅数值差异 |
-| XGBoost基线、搜索、固定Best | 数值差异，历史/当前最优参数须区分 |
-| 真实融合、SHAP、最终预测 | 尚未通过新工程重新运行 |
+| 中文研究稿 | [PDF](paper/zju_zh_layout_revision/main.pdf) · [源码](paper/zju_zh_layout_revision/main.tex) · [构建说明](paper/zju_zh_layout_revision/BUILD.md) |
+| English research manuscript | [PDF](paper/acm_mm_layout_revision/main.pdf) · [Source](paper/acm_mm_layout_revision/main.tex) · [Build](paper/acm_mm_layout_revision/BUILD.md) |
+| 实验与图表来源 | [结果来源清单](results/paper_result_manifest.md) · [89项冻结哈希](results/frozen_artifacts_sha256.md) |
+| Python工程 | [工程验收](docs/PYTHON_ENGINEERING_ACCEPTANCE.md) · [实现说明](scripts/README.md) |
+| ML审计Skill | [SKILL.md](.agents/skills/ml-experiment-audit/SKILL.md) · [两页示范](docs/ml_workflow_demo.pdf) · [执行验证与限制](docs/END_TO_END_SKILL_WORKFLOW_ACCEPTANCE.md) |
+| 学习与课程材料 | [文档导航](docs/README.md)，含LaTeX学习、发表论文对照及历史验收 |
 
-证据见 docs/PYTHON_ENGINEERING_ACCEPTANCE.md、scripts/FUSION_PROTOCOL.md、scripts/REMAINING_PROTOCOLS.md及源CSV。详细本机staging不整体发布；脱敏摘要不能冒充完整日志。Fresh Clone预检不是完整训练复现。
+两份论文为研究学习稿，不代表已被期刊或会议接收。paper/*_layout_revision/为优先阅读版本；原稿保留冻结及修改对照意义。不要在原稿目录编译或覆盖正式图片。
 
-## 冻结来源及Notebook范围
+## 目录结构
 
-results/frozen_artifacts_sha256.md登记89个结果/模型/图及原稿文件。核验器强制数量、唯一性、路径、文件存在与SHA256；python -O不能跳过。文件换行由.gitattributes逐项固定，保留历史检出字节，未改写实验数字。
-
-```powershell
-python -B scripts/export_paper_results.py --output-dir staging/paper_export_check_001 --dry-run
+```text
+configs/       固定协议与实验配置
+src/           数据、模型、评价、验证、融合与安全运行模块
+scripts/       实验CLI、结果导出及核验入口
+tests/         合成数据离线测试
+results/       冻结指标、论文CSV及来源清单
+figures/paper/ 正式中英文论文图
+paper/         中英文论文源码、PDF及历史版本
+docs/          复现指南、工程文档与研究学习材料
+notebooks/     历史探索实验；不作为默认执行入口
+.agents/skills/ml-experiment-audit/ 只读优先的ML审计Skill
 ```
 
-导出同时核对注册哈希和复制字节，来源错误或未登记会拒绝；显式去掉dry-run才创建全新隔离目录。
+## 复现状态与局限
 
-Notebook原有611行工作区修改的发布归属未确认，本次**没有提交**。本地核验登记的是该工作副本哈希；Fresh Clone保留原已提交Notebook，不能宣称包含未发布修改。因此克隆验收使用 --hashes-only；默认完整核验另外检查本地Notebook登记身份和既有CSV关系，克隆中的Notebook身份不应被伪装成该未发布工作副本。不要Run All。
+- Ridge、特征处理、Ridge调参和LightGBM基线在已验证环境中达到严格数值一致；RF、GBDT及XGBoost存在数值差异，跨版本原因尚未全部确认。
+- 新工程的真实融合、SHAP和最终预测入口仍禁用；协议测试通过不等于完整训练复现。
+- 特征匿名、时间语义未完全确认，且调参与评价不是嵌套设计；结论限于当前数据和设置，不作显著性或因果推断。
+- SHAP解释Best XGBoost，而非Weighted Blend；无标签测试集不能计算真实性能指标。
 
-## 论文
-
-最新独立修订稿及构建：
-
-```powershell
-./paper/acm_mm_layout_revision/build.ps1
-./paper/zju_zh_layout_revision/build.ps1
-```
-
-英文使用pdfLaTeX+BibTeX，中文使用XeLaTeX+BibTeX；详见各BUILD.md。需要预先安装LaTeX、acmart/ctex等包与相应字体，脚本禁止自动安装。中文默认从系统Fonts目录解析原SimSun/Times文件，也可设置STEAM_PAPER_FONT_DIR；生成的local_font_paths.tex不提交。字体缺失时报错，不偷偷换字体。
-
-修订PDF为英文6页、中文7页，仍各28篇参考文献。原冻结稿和正式图只读保留。中文文献格式、数学粗体/CJK字体回退、部分图文距离和末页留白尚有差距，不宣称完全符合期刊/会议生产标准。作者/单位信息仍需真实填写；不会编造作者。
-
-## Skill安装与调用
-
-仓库级Skill在 .agents/skills/ml-experiment-audit/，在仓库根启动支持该规则的Codex即可发现；新机器不必依赖作者的用户级安装。跨仓库共享时，经许可将该单个目录复制到用户的 ~/.agents/skills/ml-experiment-audit，不复制整个用户目录、不覆盖已有版本。
-
-显式调用示例：“请使用 $ml-experiment-audit 只读审计本项目的验证协议和结果来源。”
-
-官方结构校验器属于本机Codex系统Skill，不随本仓库捆绑；已安装skill-creator时按其实际位置运行quick_validate.py。仓库自带离线测试不依赖它。真实发现、显式/隐式/跨项目及负面触发的五个独立会话证据见 docs/ML_EXPERIMENT_AUDIT_SKILL_ACCEPTANCE.md。这是已验证环境的有限样例，不保证所有模型、版本或会话必然自动触发。
-
-## 安全与最终状态
-
-### 显式授权的CSV→图表→示范PDF工作流（不训练）
-
-普通审计仍默认只读。只有明确要求生成示范成果时，才执行仓库Skill的
-`references/report-workflow.md`分支；用户级安装副本不自动同步。当前示范适配器
-只支持本项目已冻结的回归CSV，不读取原始数据或模型，也不混排五折CV与融合验证结果。
-
-```powershell
-python -B .agents/skills/ml-experiment-audit/scripts/build_demo_report.py --project-root . --output-dir staging/my_unique_demo --check-only
-# 以下命令仅在用户明确授权生成示范成果后运行；目标目录必须不存在。
-python -B .agents/skills/ml-experiment-audit/scripts/build_demo_report.py --project-root . --output-dir staging/my_unique_demo --authorize-demo
-python -B .agents/skills/ml-experiment-audit/scripts/verify_demo_report.py --project-root . --run-dir staging/my_unique_demo
-python -B .agents/skills/ml-experiment-audit/scripts/test_report_workflow.py
-```
-
-构建使用现有matplotlib PdfPages及Poppler，不安装依赖。两页渲染须全部实际查看，
-再记录带每页SHA256的`visual_review.json`并运行验证器；编译/构建成功不等于视觉PASS。
-没有视觉记录时只返回等待视觉验收，不生成成功标记。具体证据与限制见
-`docs/END_TO_END_SKILL_WORKFLOW_ACCEPTANCE.md`。
-
-本仓库不包含私有原始数据，不自动上传数据。历史模型文件只应在可信环境按版本加载；哈希不等于反序列化安全。输出guard是工程边界，不是对抗并发攻击的完整OS沙箱。不要删除旧Notebook、覆盖冻结结果、重跑正式图或为了数值一致反复调参。
-
-最终发布/Fresh Clone结果、测试数量、提交身份和未解决问题见 docs/FINAL_PROJECT_ACCEPTANCE.md。保留原研究的匿名特征、非嵌套选模、融合独立性和跨版本差异限制。
-
-### 第三次学习规划收尾
-
-第35步归档结论：**端到端生成已实测成功、独立会话生成受执行策略限制**。
-现有冻结CSV到新图表、示范PDF及逐页视觉检查已在父会话实际完成；独立新会话
-成功加载Skill，但生成执行遭策略拦截，因此总验收保持PARTIAL PASS，不宣称独立
-会话端到端完全通过。详见`docs/END_TO_END_SKILL_WORKFLOW_ACCEPTANCE.md`。
-第三次学习规划结束，未解决的环境限制如实保留，不自动继续第36步或新实验。
+详细边界见[复现指南](docs/REPRODUCIBILITY.md)。本仓库尚未指定开源许可证；代码、数据和第三方资料的使用权限应分别确认，不默认继承参考项目的许可。

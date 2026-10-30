@@ -1,6 +1,13 @@
-# 课程交付文档索引
+# 文档导航
 
-## 优先阅读
+## 从哪里开始
+
+- **了解项目**：[首页](../README.md)展示问题、实验协议和主要结果。
+- **运行与复现**：[复现指南](REPRODUCIBILITY.md)集中说明环境、数据、八阶段CLI和安全边界。
+- **阅读论文**：[中文PDF](../paper/zju_zh_layout_revision/main.pdf)与[英文PDF](../paper/acm_mm_layout_revision/main.pdf)为优先阅读版本，均保留可编辑源码。
+- **核对证据**：[结果来源](../results/paper_result_manifest.md)与[工程验收](PYTHON_ENGINEERING_ACCEPTANCE.md)区分历史指标、协议迁移和数值复现。
+
+## 研究与工程资料
 
 1. [中文修订论文](../paper/zju_zh_layout_revision/main.pdf)与[英文修订论文](../paper/acm_mm_layout_revision/main.pdf)。原稿在`paper/zju_zh/`与`paper/acm_mm/`，保留冻结及修改对照身份。
 2. [LaTeX排版学习总结](LATEX_LAYOUT_LEARNING_NOTES.md)、[真实已发表论文对照](PUBLISHED_PAPER_LAYOUT_COMPARISON.md)。第三方论文PDF与完整页面证据仅在本地，不公开全文。
