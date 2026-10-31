@@ -11,7 +11,9 @@ conda env create -f environment.yml
 conda activate steam-prediction
 ```
 
-声明文件不等于跨机器安装已验证。历史版本证据见[工程验收](PYTHON_ENGINEERING_ACCEPTANCE.md)。配置文件虽名为YAML，当前入口以json.loads读取，只接受JSON语法子集。本次没有安装依赖。
+声明文件不等于跨机器安装已验证。**2026-10-31按原文件创建隔离环境实测失败：本机继承的镜像频道返回HTTP 403，尚未进入依赖解析及pip安装阶段。** 后续配置隔离预检也未能排除全局频道，因此没有再次发起安装。新环境的测试和包兼容性均未验证，不以现有环境通过替代。详见[整改报告](RESEARCH_REMEDIATION_R1.md)及[机器可读证据](RESEARCH_REMEDIATION_R1_EVIDENCE.json)。历史依赖声明未修改。
+
+历史版本证据见[工程验收](PYTHON_ENGINEERING_ACCEPTANCE.md)。配置文件虽名为YAML，当前入口以json.loads读取，只接受JSON语法子集。上方创建命令为预期使用方式，不表示已在本轮环境成功运行。
 
 依据数据提供方授权自行取得带表头、制表符分隔的数据，放置为：
 
@@ -32,18 +34,22 @@ python -B scripts/run_experiment.py --config configs/experiment.yaml --output-di
 
 前五阶段dry-run读取数据并检查Schema，后三阶段只预检协议、文件和路径。所有输出必须位于新的staging/或reproduction/目录，已有目录包括空目录均拒绝覆盖。
 
-| stage | 功能 | 真实执行状态 |
-|---|---|---|
-| ridge-baseline | 固定α=1/5，TimeSeriesSplit/KFold | 显式非预检调用可训练 |
-| tree-baselines | 四种树模型基线 | 同上 |
-| feature-processing | Ridge、KBest20、PCA95 | 同上 |
-| ridge-tuning | 原10个α候选 | 同上 |
-| xgboost-tuning | 原108候选；历史Best单独评价 | 同上 |
-| fusion | OOF、开发/验证划分协议 | 真实入口禁用 |
-| shap | 文件预检、合成接口测试 | 真实重算禁用 |
-| final-prediction | 文件预检、合成函数测试 | 真实训练/预测禁用 |
+| stage | 非预检入口实际能力 | dry-run | 历史数值复现证据 |
+|---|---|---|---|
+| ridge-baseline | 固定α=1/5，TimeSeriesSplit/KFold；可训练 | 读取真实数据、检查Schema，不拟合 | 已有运行记录在严格容差内一致 |
+| tree-baselines | 四种未调参树模型；可训练 | 同上 | LightGBM一致；RF/GBDT/XGBoost有差异 |
+| feature-processing | Ridge、KBest20、PCA95；可训练 | 同上 | 已有运行记录在严格容差内一致 |
+| ridge-tuning | 原10个α候选、搜索及refit；可训练 | 同上 | 已有运行记录在严格容差内一致 |
+| xgboost-tuning | 原108候选搜索、固定历史Best单独评价；可训练 | 同上 | 历史/当前最佳参数及分数存在差异 |
+| fusion | 明确拒绝真实执行；合成测试使用模块原语 | 文件存在/索引协议/路径预检，不读数组 | 新工程未运行真实融合 |
+| shap | 明确拒绝真实重算；合成测试注入explainer | 文件存在/路径预检，不读数组 | 新工程未重算真实SHAP |
+| final-prediction | 明确拒绝真实训练/预测；合成函数测试 | 文件存在/路径预检，不读数组 | 新工程未重跑最终预测 |
 
 各阶段均支持check-only。请先阅读[脚本说明](../scripts/README.md)及[安全约定](../scripts/MIGRATION_SAFETY.md)，不要为运行审核而去掉预检开关。
+
+所有阶段的check-only仅核对配置、数据文件可用性和输出安全，报告raw_schema_checked=false，不读取原始数据、不创建目录。dry-run仍先检查数据文件存在；后三阶段的dry-run不等于无原始文件也一定可运行。CLI禁用是正常入口边界，不是阻止任意Python调用训练的操作系统沙箱。
+
+上表“历史数值复现”引用已归档迁移记录，不是本轮重跑，更不是environment.yml的新环境验收。2026-10-31仅在已有Python 3.9.13环境中重新执行离线检查；新环境结果为NOT RUN。
 
 ## 测试与冻结来源
 

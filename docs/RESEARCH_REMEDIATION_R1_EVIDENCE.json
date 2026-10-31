@@ -1,0 +1,307 @@
+{
+  "date": "2026-10-31",
+  "scope": "documentation and protocol/source audit; no real model experiments",
+  "head_before": "b9ab96ab9e8938ccb955773cb737c8d51b8dcefc",
+  "os": "Windows-10-10.0.26200-SP0",
+  "new_environment": {
+    "status": "BLOCKED",
+    "original_spec_unchanged": true,
+    "spec_sha256": "2e47f2bafa7ebb78fc9d7518c089c3d61375b2ebd2817edcf95cb437331431e1",
+    "conda_version": "26.3.2",
+    "creation_exit_code": 1,
+    "elapsed_seconds": 5.42,
+    "error": "CondaHTTPError: HTTP 403 Forbidden while fetching pytorch/win-64/repodata.json from inherited mirror channel",
+    "pip_phase_reached": false,
+    "python_version": null,
+    "installed_packages": null,
+    "new_environment_tests": "NOT RUN",
+    "configuration_isolation": "REFUSED: resolved channel set still included global mirrors; no second create command launched",
+    "tls_note": "Initial attempt inherited ssl_verify=false; subsequent configuration prechecks used true, with no successful isolation. No global setting edited.",
+    "creation_log_sha256": "a86a9f15b63f1d6f53a4d91842afd2e3689de5f8105dd478cd072b4b9fd31b89"
+  },
+  "existing_environment": {
+    "python": "3.9.13",
+    "packages": {
+      "numpy": "1.24.4",
+      "pandas": "2.0.3",
+      "scipy": "1.10.1",
+      "matplotlib": "3.7.5",
+      "seaborn": "0.13.2",
+      "scikit-learn": "1.6.1",
+      "xgboost": "2.1.4",
+      "lightgbm": "4.6.0",
+      "shap": "0.49.1",
+      "joblib": "1.5.3",
+      "jupyter": null
+    },
+    "checks": {
+      "status": "PASS",
+      "checks": [
+        {
+          "check": "required_delivery_files",
+          "exit_code": 0,
+          "missing": []
+        },
+        {
+          "check": "unit_tests",
+          "exit_code": 0,
+          "total": 57,
+          "skipped": 1,
+          "passed": 56
+        },
+        {
+          "check": "skill_tests",
+          "exit_code": 0,
+          "total": 20,
+          "skipped": 1,
+          "passed": 19
+        },
+        {
+          "check": "official_skill_validation",
+          "exit_code": 0
+        },
+        {
+          "check": "help_run_experiment",
+          "exit_code": 0
+        },
+        {
+          "check": "help_export_paper_results",
+          "exit_code": 0
+        },
+        {
+          "check": "help_verify_frozen_results",
+          "exit_code": 0
+        },
+        {
+          "check": "help_check_delivery",
+          "exit_code": 0
+        },
+        {
+          "check": "help_check_skill_discovery",
+          "exit_code": 0
+        },
+        {
+          "check": "check_only_ridge-baseline",
+          "exit_code": 0
+        },
+        {
+          "check": "check_only_tree-baselines",
+          "exit_code": 0
+        },
+        {
+          "check": "check_only_feature-processing",
+          "exit_code": 0
+        },
+        {
+          "check": "check_only_ridge-tuning",
+          "exit_code": 0
+        },
+        {
+          "check": "check_only_xgboost-tuning",
+          "exit_code": 0
+        },
+        {
+          "check": "check_only_fusion",
+          "exit_code": 0
+        },
+        {
+          "check": "check_only_shap",
+          "exit_code": 0
+        },
+        {
+          "check": "check_only_final-prediction",
+          "exit_code": 0
+        },
+        {
+          "check": "frozen_hashes_optimized",
+          "exit_code": 0
+        },
+        {
+          "check": "export_dry_run",
+          "exit_code": 0
+        }
+      ],
+      "unused_outputs_created": 0,
+      "data_schema_dry_runs": false,
+      "training_executed": false,
+      "paper_compilation_performed": false,
+      "notebook_sha256": "807341c2b04b69c76de2131be29efa424958f49a3a2110759125ee598659b9be",
+      "notebook_note": "Working-copy identity only; unpublished Notebook changes are not a Fresh Clone prerequisite."
+    },
+    "workflow_tests": {
+      "total": 16,
+      "passed": 16,
+      "failed": 0
+    }
+  },
+  "notebook": {
+    "committed_sha256": "4f16d2fb73ea396ce5d2d8005425bba57b3104d795986b4cc0be2ac1edeba55a",
+    "working_sha256": "807341c2b04b69c76de2131be29efa424958f49a3a2110759125ee598659b9be",
+    "cells_before": 171,
+    "cells_after": 179,
+    "existing_cells_unchanged": true,
+    "appended_cell_indices": [
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178
+    ],
+    "appended_code_cells": 5,
+    "appended_markdown_cells": 3,
+    "execution_counts": [
+      95,
+      96,
+      97,
+      98,
+      99
+    ],
+    "executed_this_round": false
+  },
+  "protocol": {
+    "folds": {
+      "TimeSeriesSplit": [
+        {
+          "fold": 1,
+          "train_n": 483,
+          "validation_n": 481,
+          "train_first": 0,
+          "train_last": 482,
+          "validation_first": 483,
+          "validation_last": 963,
+          "overlap": 0
+        },
+        {
+          "fold": 2,
+          "train_n": 964,
+          "validation_n": 481,
+          "train_first": 0,
+          "train_last": 963,
+          "validation_first": 964,
+          "validation_last": 1444,
+          "overlap": 0
+        },
+        {
+          "fold": 3,
+          "train_n": 1445,
+          "validation_n": 481,
+          "train_first": 0,
+          "train_last": 1444,
+          "validation_first": 1445,
+          "validation_last": 1925,
+          "overlap": 0
+        },
+        {
+          "fold": 4,
+          "train_n": 1926,
+          "validation_n": 481,
+          "train_first": 0,
+          "train_last": 1925,
+          "validation_first": 1926,
+          "validation_last": 2406,
+          "overlap": 0
+        },
+        {
+          "fold": 5,
+          "train_n": 2407,
+          "validation_n": 481,
+          "train_first": 0,
+          "train_last": 2406,
+          "validation_first": 2407,
+          "validation_last": 2887,
+          "overlap": 0
+        }
+      ],
+      "KFold": [
+        {
+          "fold": 1,
+          "train_n": 2310,
+          "validation_n": 578,
+          "train_first": 0,
+          "train_last": 2887,
+          "validation_first": 29,
+          "validation_last": 2886,
+          "overlap": 0
+        },
+        {
+          "fold": 2,
+          "train_n": 2310,
+          "validation_n": 578,
+          "train_first": 1,
+          "train_last": 2886,
+          "validation_first": 0,
+          "validation_last": 2887,
+          "overlap": 0
+        },
+        {
+          "fold": 3,
+          "train_n": 2310,
+          "validation_n": 578,
+          "train_first": 0,
+          "train_last": 2887,
+          "validation_first": 2,
+          "validation_last": 2885,
+          "overlap": 0
+        },
+        {
+          "fold": 4,
+          "train_n": 2311,
+          "validation_n": 577,
+          "train_first": 0,
+          "train_last": 2887,
+          "validation_first": 3,
+          "validation_last": 2882,
+          "overlap": 0
+        },
+        {
+          "fold": 5,
+          "train_n": 2311,
+          "validation_n": 577,
+          "train_first": 0,
+          "train_last": 2887,
+          "validation_first": 1,
+          "validation_last": 2880,
+          "overlap": 0
+        }
+      ]
+    },
+    "oof_precheck": {
+      "mode": "protocol_precheck_only",
+      "training_enabled": false,
+      "oof_count": 2405,
+      "uncovered_count": 483,
+      "oof_first_row": 483,
+      "oof_last_row": 2887,
+      "development_count": 1924,
+      "validation_count": 481,
+      "validation_first_row": 2407,
+      "independence": "Validation excluded from weight/meta-model fit; upstream hyperparameter development may use these labels; not external test."
+    },
+    "models_trained": false,
+    "data_loaded": false
+  },
+  "frozen": {
+    "before_count": 89,
+    "after_count": 89,
+    "registry_sha256": "bbe7cd28df0fae1648eef1119b68882749261919f241557618c5ab18082c53dd",
+    "mismatches": []
+  },
+  "unchanged_submission_artifacts": {
+    "paper/acm_mm_layout_revision/main.tex": "4cf0248192713e8f58f200a5f41a818cb38d3b9b475bce565ca12061ca671a28",
+    "paper/acm_mm_layout_revision/main.pdf": "965860aa79b63fc10b0834a7e49a048f37e70c1ea1aaa6ad2a6b9342af7015b2",
+    "paper/acm_mm_layout_revision/references.bib": "3a4cd0578e216ba5ddc6e48a24ae03df50284af63cf5555d288f7a70c8ac7bec",
+    "paper/zju_zh_layout_revision/main.tex": "c3151584304fd337bf700fb03a241cbd05191c752047048d3f89081385d2853e",
+    "paper/zju_zh_layout_revision/main.pdf": "f2366c59e67a0f3a8b6faab552b15022ceab516b7f12ff9d946ec5fe677898dd",
+    "paper/zju_zh_layout_revision/references.bib": "452d8174b00eae904ed8e62938605f8c9bf263cd8d4c1429295598597f6c455b"
+  },
+  "unverified": [
+    "new environment dependency solving and installation",
+    "new environment offline tests and check-only",
+    "full real training reproduction",
+    "current official submission requirements and PDF visual compliance"
+  ],
+  "overall_status": "PARTIAL PASS"
+}

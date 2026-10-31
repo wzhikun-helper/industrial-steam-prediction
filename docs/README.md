@@ -6,6 +6,7 @@
 - **运行与复现**：[复现指南](REPRODUCIBILITY.md)集中说明环境、数据、八阶段CLI和安全边界。
 - **阅读论文**：[中文PDF](../paper/zju_zh_layout_revision/main.pdf)与[英文PDF](../paper/acm_mm_layout_revision/main.pdf)为优先阅读版本，均保留可编辑源码。
 - **核对证据**：[结果来源](../results/paper_result_manifest.md)与[工程验收](PYTHON_ENGINEERING_ACCEPTANCE.md)区分历史指标、协议迁移和数值复现。
+- **本轮整改**：[第一轮报告](RESEARCH_REMEDIATION_R1.md) · [测试与环境证据](RESEARCH_REMEDIATION_R1_EVIDENCE.json) · [Notebook工作副本审查](NOTEBOOK_WORKTREE_REVIEW.md) · [投稿检查清单](SUBMISSION_CHECKLIST.md)。独立新环境创建目前BLOCKED，不等于完整重训复现。
 
 ## 研究与工程资料
 

@@ -6,6 +6,8 @@ A reproducibility-focused regression study with fixed validation protocols, mode
 
 [中文论文](paper/zju_zh_layout_revision/main.pdf) · [English manuscript](paper/acm_mm_layout_revision/main.pdf) · [快速开始](#快速开始) · [复现指南](docs/REPRODUCIBILITY.md) · [文档导航](docs/README.md)
 
+首次使用：先读[环境状态与阶段能力](docs/REPRODUCIBILITY.md)，再运行下方无数据预检；研究证据见[第一轮审查](docs/RESEARCH_REMEDIATION_R1.md)，投稿准备见[独立检查清单](docs/SUBMISSION_CHECKLIST.md)。2026-10-31的新环境创建被本机Conda频道访问错误阻塞，尚未完成独立环境验收。
+
 ## 项目概览
 
 使用38个匿名特征预测工业蒸汽量，比较线性模型、树模型、特征处理和融合方案，并将Notebook实验整理为配置驱动、输出隔离、可测试的Python工程。
